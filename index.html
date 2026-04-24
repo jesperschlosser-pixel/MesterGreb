@@ -308,6 +308,33 @@
       transition: transform 0.25s, box-shadow 0.25s;
     }
     .problem-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+
+    /* ── Centre all card content ── */
+    .problem-card,
+    .service-card,
+    .step,
+    .testimonial-card,
+    .craft-box,
+    .pride-point { text-align: center; }
+    .problem-icon,
+    .service-icon,
+    .step-dot { margin-left: auto; margin-right: auto; }
+    .service-result,
+    .testimonial-author { justify-content: center; }
+    .steps-track { justify-items: center; }
+    .contact-info { text-align: center; }
+    .contact-item { justify-content: center; }
+    .form-card h3 { text-align: center; }
+
+    /* ── Centre section headers on full-width sections ── */
+    .services-bg .section-header,
+    .testimonials-bg .section-header,
+    .section .section-header,
+    .cta-section .section-header,
+    .crafts-inner .crafts-label { text-align: center; }
+    .services-bg .section-sub,
+    .testimonials-bg .section-sub,
+    .section .section-sub { margin-left: auto; margin-right: auto; }
     .problem-icon {
       width: 42px; height: 42px;
       background: rgba(192,82,43,0.1);
@@ -710,7 +737,7 @@
     .form-disclaimer { font-size: 0.76rem; color: var(--iron-light); text-align: center; }
 
     /* ===================== FOOTER ===================== */
-    footer { background: var(--iron); color: rgba(255,255,255,0.45); padding: 3rem 2.5rem 2rem; }
+    footer { background: var(--iron); color: rgba(255,255,255,0.45); padding: 3rem 2.5rem 6rem; }
     .footer-inner { max-width: 1120px; margin: 0 auto; }
     .footer-top {
       display: flex; justify-content: space-between;
@@ -982,8 +1009,7 @@
     }
     .sticky-btn-text { display: flex; flex-direction: column; }
 
-    /* Push page content up so sticky bar doesn't cover it */
-    body.sticky-visible { padding-bottom: 72px; }
+    /* Sticky bar sits over footer — footer gets extra padding instead */
 
     @media (max-width: 480px) {
       .sticky-btn { padding: 0.85rem 1rem; gap: 0.5rem; }
@@ -1742,14 +1768,18 @@
     const msgEl = document.getElementById('modal-error-msg');
 
     if (!name) {
-      msgEl.textContent = 'Indtast venligst dit navn, så vi ved hvem vi taler med.';
+      msgEl.textContent = 'Udfyld venligst dit navn.';
       openModal('modal-error'); return;
     }
-    if (!phone && !email) {
-      msgEl.textContent = 'Vi har brug for enten dit telefonnummer eller din e-mail for at kunne kontakte dig.';
+    if (!phone) {
+      msgEl.textContent = 'Udfyld venligst dit telefonnummer.';
       openModal('modal-error'); return;
     }
-    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    if (!email) {
+      msgEl.textContent = 'Udfyld venligst din e-mail.';
+      openModal('modal-error'); return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       msgEl.textContent = 'E-mailadressen ser ikke korrekt ud — tjek venligst og prøv igen.';
       openModal('modal-error'); return;
     }
