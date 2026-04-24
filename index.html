@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="da">
 <head>
@@ -7,13 +8,14 @@
   <meta name="description" content="MesterGreb hjælper håndværkere med at skaffe flere opgaver, automatisere tilbudsopfølgning og bygge et stærkt omdømme online." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
       --sand: #F5F0E8;
       --sand-dark: #EDE6D6;
+      --sand-mid: #E8E0CC;
       --oak: #8B6B3D;
       --oak-dark: #6B4F28;
       --iron: #2C2C28;
@@ -21,8 +23,13 @@
       --iron-light: #7A7A72;
       --rust: #C0522B;
       --rust-light: #D4694A;
+      --rust-pale: rgba(192,82,43,0.08);
       --white: #FEFCF8;
-      --radius: 6px;
+      --radius: 8px;
+      --radius-lg: 14px;
+      --shadow-sm: 0 1px 3px rgba(44,44,40,0.08), 0 4px 12px rgba(44,44,40,0.05);
+      --shadow-md: 0 4px 16px rgba(44,44,40,0.1), 0 1px 4px rgba(44,44,40,0.06);
+      --shadow-lg: 0 12px 40px rgba(44,44,40,0.14), 0 2px 8px rgba(44,44,40,0.06);
     }
 
     html { scroll-behavior: smooth; }
@@ -33,527 +40,921 @@
       color: var(--iron);
       line-height: 1.65;
       font-size: 16px;
+      overflow-x: hidden;
     }
 
-    /* NAV */
+    /* ===================== NAV ===================== */
     nav {
       position: fixed; top: 0; left: 0; right: 0;
-      z-index: 100;
-      background: rgba(254,252,248,0.95);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid rgba(44,44,40,0.08);
-      padding: 0 2rem;
-      height: 68px;
+      z-index: 200;
+      background: rgba(254,252,248,0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(44,44,40,0.07);
+      padding: 0 2.5rem;
+      height: 70px;
       display: flex; align-items: center; justify-content: space-between;
+      transition: box-shadow 0.3s;
     }
+    nav.scrolled { box-shadow: var(--shadow-sm); }
     .nav-logo {
       font-family: 'Fraunces', serif;
-      font-weight: 700;
-      font-size: 1.4rem;
-      color: var(--iron);
-      text-decoration: none;
-      letter-spacing: -0.02em;
+      font-weight: 700; font-size: 1.45rem;
+      color: var(--iron); text-decoration: none;
+      letter-spacing: -0.025em;
     }
     .nav-logo span { color: var(--rust); }
-    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links { display: flex; gap: 2.2rem; align-items: center; }
     .nav-links a {
-      text-decoration: none;
-      color: var(--iron-mid);
-      font-size: 0.95rem;
-      font-weight: 500;
-      transition: color 0.2s;
+      text-decoration: none; color: var(--iron-mid);
+      font-size: 0.92rem; font-weight: 500;
+      transition: color 0.2s; letter-spacing: 0.01em;
     }
     .nav-links a:hover { color: var(--iron); }
     .nav-cta {
-      background: var(--iron);
+      background: var(--rust) !important;
       color: var(--white) !important;
-      padding: 0.55rem 1.2rem;
+      padding: 0.6rem 1.4rem;
       border-radius: var(--radius);
-      transition: background 0.2s !important;
+      font-size: 0.9rem !important;
+      transition: background 0.2s, transform 0.15s !important;
     }
-    .nav-cta:hover { background: var(--rust) !important; color: var(--white) !important; }
+    .nav-cta:hover { background: var(--rust-light) !important; transform: translateY(-1px); }
 
-    /* HERO */
+    /* ===================== HERO ===================== */
     .hero {
-      padding: 140px 2rem 100px;
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 120px 2.5rem 80px;
+      background: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -120px; right: -80px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(192,82,43,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: -100px; left: -60px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(139,107,61,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 1120px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: center;
+      position: relative; z-index: 1;
     }
     .hero-eyebrow {
-      font-size: 0.82rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--rust);
-      margin-bottom: 1.2rem;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.78rem; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--rust); margin-bottom: 1.6rem;
+      background: var(--rust-pale);
+      padding: 0.4rem 0.9rem; border-radius: 100px;
+      border: 1px solid rgba(192,82,43,0.15);
     }
+    .hero-eyebrow::before { content: '●'; font-size: 0.5rem; }
     .hero h1 {
       font-family: 'Fraunces', serif;
-      font-size: clamp(2.6rem, 5vw, 3.8rem);
-      font-weight: 700;
-      line-height: 1.08;
-      letter-spacing: -0.03em;
-      color: var(--iron);
-      margin-bottom: 1.4rem;
+      font-size: clamp(2.8rem, 5.5vw, 4.2rem);
+      font-weight: 700; line-height: 1.05;
+      letter-spacing: -0.035em; color: var(--iron);
+      margin-bottom: 1.6rem;
     }
-    .hero h1 em {
-      font-style: italic;
+    .hero h1 .static { display: block; }
+    .hero h1 .typewriter-wrap {
+      display: block;
       color: var(--rust);
-    }
-    .hero-sub {
-      font-size: 1.1rem;
-      color: var(--iron-mid);
-      line-height: 1.7;
-      max-width: 480px;
-      margin-bottom: 2.2rem;
-    }
-    .hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
-    .btn-primary {
-      background: var(--rust);
-      color: var(--white);
-      padding: 0.85rem 1.8rem;
-      border-radius: var(--radius);
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 1rem;
-      transition: background 0.2s, transform 0.15s;
-      display: inline-block;
-    }
-    .btn-primary:hover { background: var(--rust-light); transform: translateY(-1px); }
-    .btn-secondary {
-      color: var(--iron-mid);
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.95rem;
-      display: flex; align-items: center; gap: 0.4rem;
-    }
-    .btn-secondary:hover { color: var(--iron); }
-    .btn-secondary::after { content: '→'; }
-
-    .hero-visual {
+      font-style: normal;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      min-height: 1.15em;
       position: relative;
     }
+    .typewriter-text { border-right: 3px solid var(--rust); padding-right: 4px; }
+    .typewriter-text.done { border-right: none; padding-right: 0; }
+    .hero-sub {
+      font-size: 1.1rem; color: var(--iron-mid);
+      line-height: 1.75; max-width: 460px;
+      margin-bottom: 2.4rem; font-weight: 300;
+    }
+    .hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; margin-bottom: 2.8rem; }
+
+    .btn-primary {
+      background: var(--rust); color: var(--white);
+      padding: 0.9rem 2rem; border-radius: var(--radius);
+      text-decoration: none; font-weight: 500; font-size: 0.95rem;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      display: inline-block; box-shadow: 0 4px 14px rgba(192,82,43,0.3);
+    }
+    .btn-primary:hover { background: var(--rust-light); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(192,82,43,0.35); }
+    .btn-ghost {
+      color: var(--iron-mid); text-decoration: none; font-weight: 500;
+      font-size: 0.92rem; display: flex; align-items: center; gap: 0.5rem;
+      padding: 0.9rem 1.4rem;
+      border: 1.5px solid rgba(44,44,40,0.15);
+      border-radius: var(--radius); transition: all 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--iron); color: var(--iron); background: rgba(44,44,40,0.03); }
+
+    .hero-guarantee {
+      display: flex; align-items: center; gap: 0.6rem;
+      font-size: 0.82rem; color: var(--iron-light); font-weight: 400;
+    }
+    .hero-guarantee svg { width: 16px; height: 16px; stroke: var(--oak); fill: none; stroke-width: 2; flex-shrink: 0; }
+
+    /* Hero card */
+    .hero-visual { position: relative; }
     .hero-card {
       background: var(--sand);
-      border-radius: 12px;
+      border-radius: var(--radius-lg);
       padding: 2rem;
-      border: 1px solid rgba(44,44,40,0.08);
+      border: 1px solid rgba(44,44,40,0.09);
+      box-shadow: var(--shadow-lg);
+      position: relative;
+    }
+    .hero-card-badge {
+      position: absolute; top: -14px; right: 20px;
+      background: var(--rust); color: var(--white);
+      font-size: 0.72rem; font-weight: 600;
+      padding: 0.3rem 0.8rem; border-radius: 100px;
+      letter-spacing: 0.05em; text-transform: uppercase;
     }
     .hero-card-header {
-      display: flex; align-items: center; gap: 0.8rem;
-      margin-bottom: 1.4rem;
+      display: flex; align-items: center; gap: 0.9rem;
+      margin-bottom: 1.6rem;
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid rgba(44,44,40,0.08);
     }
     .hero-avatar {
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      background: var(--oak);
+      width: 46px; height: 46px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--oak), var(--oak-dark));
       display: flex; align-items: center; justify-content: center;
-      color: var(--white);
-      font-weight: 600; font-size: 0.9rem;
+      color: var(--white); font-weight: 600; font-size: 0.88rem;
+      box-shadow: 0 2px 8px rgba(107,79,40,0.3);
     }
-    .hero-card-name { font-weight: 500; font-size: 0.95rem; }
-    .hero-card-trade { font-size: 0.82rem; color: var(--iron-light); }
-    .hero-stats {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 1rem; margin-bottom: 1.4rem;
-    }
+    .hero-card-name { font-weight: 600; font-size: 0.95rem; }
+    .hero-card-trade { font-size: 0.8rem; color: var(--iron-light); }
+    .hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.75rem; }
     .hero-stat {
-      background: var(--white);
-      border-radius: var(--radius);
-      padding: 0.9rem 1rem;
+      background: var(--white); border-radius: var(--radius);
+      padding: 1rem; border: 1px solid rgba(44,44,40,0.06);
+      transition: transform 0.2s;
     }
+    .hero-stat:hover { transform: translateY(-2px); }
     .hero-stat-num {
       font-family: 'Fraunces', serif;
-      font-size: 1.8rem; font-weight: 700;
-      color: var(--iron); line-height: 1;
-      margin-bottom: 0.2rem;
+      font-size: 1.9rem; font-weight: 700;
+      color: var(--iron); line-height: 1; margin-bottom: 0.25rem;
     }
     .hero-stat-num.up { color: var(--rust); }
-    .hero-stat-label { font-size: 0.78rem; color: var(--iron-light); }
+    .hero-stat-label { font-size: 0.76rem; color: var(--iron-light); line-height: 1.3; }
     .hero-review {
+      background: var(--white); border-radius: var(--radius);
+      padding: 1rem; border: 1px solid rgba(44,44,40,0.06);
+    }
+    .hero-stars { color: #E8A020; font-size: 0.85rem; margin-bottom: 0.4rem; letter-spacing: 1px; }
+    .hero-review-text { font-size: 0.82rem; color: var(--iron-mid); font-style: italic; line-height: 1.5; }
+    .hero-review-author { font-size: 0.74rem; color: var(--iron-light); margin-top: 0.4rem; }
+
+    /* ===================== CRAFTS SECTION ===================== */
+    .crafts-section {
+      padding: 4rem 2.5rem;
+      background: var(--sand);
+    }
+    .crafts-inner { max-width: 1120px; margin: 0 auto; }
+    .crafts-label {
+      text-align: center;
+      font-size: 0.78rem; letter-spacing: 0.13em;
+      text-transform: uppercase; color: var(--iron-light);
+      margin-bottom: 2rem; font-weight: 500;
+    }
+    .crafts-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 1rem;
+    }
+    .craft-box {
       background: var(--white);
-      border-radius: var(--radius);
-      padding: 0.9rem 1rem;
+      border-radius: var(--radius-lg);
+      padding: 1.6rem 1rem;
+      border: 1px solid rgba(44,44,40,0.07);
+      box-shadow: var(--shadow-sm);
+      display: flex; flex-direction: column;
+      align-items: center; gap: 0.75rem;
+      text-align: center;
+      cursor: default;
+      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
     }
-    .hero-stars { color: #E8A020; font-size: 0.85rem; margin-bottom: 0.3rem; }
-    .hero-review-text { font-size: 0.82rem; color: var(--iron-mid); font-style: italic; }
-    .hero-review-author { font-size: 0.76rem; color: var(--iron-light); margin-top: 0.3rem; }
-
-    .trust-bar {
-      max-width: 1100px; margin: 0 auto;
-      padding: 0 2rem 4rem;
-      display: flex; align-items: center; gap: 2rem;
-      flex-wrap: wrap;
+    .craft-box:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: rgba(192,82,43,0.2);
     }
-    .trust-label { font-size: 0.82rem; color: var(--iron-light); white-space: nowrap; }
-    .trust-divider { height: 1px; background: rgba(44,44,40,0.1); flex: 1; }
-    .trust-items { display: flex; gap: 2rem; flex-wrap: wrap; }
-    .trust-item { font-size: 0.9rem; color: var(--iron-mid); font-weight: 500; }
+    .craft-icon {
+      width: 48px; height: 48px;
+      background: var(--rust-pale);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .craft-icon svg { width: 24px; height: 24px; }
+    .craft-name {
+      font-family: 'Fraunces', serif;
+      font-size: 0.95rem; font-weight: 600;
+      color: var(--iron);
+    }
+    .craft-count { font-size: 0.75rem; color: var(--iron-light); }
 
-    /* PROBLEM */
-    .section { padding: 5rem 2rem; }
-    .section-inner { max-width: 1100px; margin: 0 auto; }
+    /* ===================== SECTION BASE ===================== */
+    .section { padding: 6rem 2.5rem; }
+    .section-inner { max-width: 1120px; margin: 0 auto; }
     .section-label {
-      font-size: 0.8rem; letter-spacing: 0.12em;
+      font-size: 0.76rem; letter-spacing: 0.14em;
       text-transform: uppercase; color: var(--rust);
-      font-weight: 500; margin-bottom: 0.8rem;
+      font-weight: 500; margin-bottom: 0.75rem;
     }
     .section-title {
       font-family: 'Fraunces', serif;
-      font-size: clamp(2rem, 4vw, 2.8rem);
-      font-weight: 700; line-height: 1.1;
-      letter-spacing: -0.025em;
-      color: var(--iron); margin-bottom: 1rem;
+      font-size: clamp(2rem, 4vw, 2.9rem);
+      font-weight: 700; line-height: 1.08;
+      letter-spacing: -0.03em; color: var(--iron);
+      margin-bottom: 1.1rem;
     }
     .section-sub {
       font-size: 1.05rem; color: var(--iron-mid);
-      max-width: 560px; line-height: 1.7;
+      max-width: 520px; line-height: 1.7; font-weight: 300;
     }
+    .section-header { margin-bottom: 3.5rem; }
 
+    /* ===================== PROBLEM ===================== */
     .problem-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem; margin-top: 3rem;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
     }
     .problem-card {
       background: var(--sand);
-      border-radius: 10px;
-      padding: 1.6rem;
-      border: 1px solid rgba(44,44,40,0.06);
+      border-radius: var(--radius-lg);
+      padding: 1.8rem;
+      border: 1px solid rgba(44,44,40,0.07);
+      transition: transform 0.25s, box-shadow 0.25s;
     }
+    .problem-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
     .problem-icon {
-      width: 40px; height: 40px;
-      background: rgba(192,82,43,0.12);
+      width: 42px; height: 42px;
+      background: rgba(192,82,43,0.1);
       border-radius: var(--radius);
       display: flex; align-items: center; justify-content: center;
-      margin-bottom: 1rem;
+      margin-bottom: 1.1rem;
     }
     .problem-icon svg { width: 20px; height: 20px; stroke: var(--rust); fill: none; stroke-width: 1.8; }
     .problem-card h3 {
       font-family: 'Fraunces', serif;
-      font-size: 1.1rem; font-weight: 600;
+      font-size: 1.05rem; font-weight: 600;
       color: var(--iron); margin-bottom: 0.5rem;
     }
-    .problem-card p { font-size: 0.9rem; color: var(--iron-mid); line-height: 1.65; }
+    .problem-card p { font-size: 0.88rem; color: var(--iron-mid); line-height: 1.65; }
 
-    /* SERVICES */
+    /* ===================== SERVICES ===================== */
     .services-bg { background: var(--iron); }
     .services-bg .section-title { color: var(--white); }
     .services-bg .section-label { color: var(--rust-light); }
-    .services-bg .section-sub { color: rgba(255,255,255,0.65); }
+    .services-bg .section-sub { color: rgba(255,255,255,0.55); }
 
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem; margin-top: 3rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
     }
     .service-card {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 10px;
-      padding: 1.8rem;
-      transition: background 0.2s;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      transition: background 0.25s, border-color 0.25s, transform 0.25s;
+      position: relative; overflow: hidden;
     }
-    .service-card:hover { background: rgba(255,255,255,0.08); }
-    .service-num {
-      font-family: 'Fraunces', serif;
-      font-size: 2rem; font-weight: 700;
-      color: var(--rust-light); line-height: 1;
-      margin-bottom: 1rem;
+    .service-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--rust), var(--rust-light));
+      opacity: 0; transition: opacity 0.25s;
     }
+    .service-card:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.14); transform: translateY(-3px); }
+    .service-card:hover::before { opacity: 1; }
+    .service-icon {
+      width: 46px; height: 46px;
+      background: rgba(192,82,43,0.18);
+      border-radius: var(--radius);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.3rem;
+    }
+    .service-icon svg { width: 22px; height: 22px; stroke: var(--rust-light); fill: none; stroke-width: 1.8; }
     .service-card h3 {
       font-family: 'Fraunces', serif;
-      font-size: 1.15rem; font-weight: 600;
-      color: var(--white); margin-bottom: 0.6rem;
+      font-size: 1.1rem; font-weight: 600;
+      color: var(--white); margin-bottom: 0.5rem;
     }
-    .service-card p { font-size: 0.9rem; color: rgba(255,255,255,0.6); line-height: 1.65; }
+    .service-card p { font-size: 0.87rem; color: rgba(255,255,255,0.55); line-height: 1.65; }
+    .service-card .service-result {
+      margin-top: 1.2rem; display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.78rem; color: var(--rust-light); font-weight: 500;
+    }
+    .service-result::before { content: '→'; }
 
-    /* HOW IT WORKS */
-    .steps {
+    /* ===================== HOW IT WORKS ===================== */
+    .steps-track {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 0; margin-top: 3.5rem;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem; margin-top: 3.5rem;
       position: relative;
     }
-    .step {
-      padding: 0 2rem 0 0;
-      position: relative;
-    }
-    .step:not(:last-child)::after {
+    .steps-track::before {
       content: '';
-      position: absolute; right: 1rem; top: 18px;
-      width: calc(100% - 60px); height: 1px;
-      background: repeating-linear-gradient(90deg, var(--oak) 0, var(--oak) 5px, transparent 5px, transparent 12px);
-      opacity: 0.3;
+      position: absolute; top: 18px; left: 60px; right: 60px;
+      height: 1px;
+      background: repeating-linear-gradient(90deg, rgba(139,107,61,0.25) 0, rgba(139,107,61,0.25) 5px, transparent 5px, transparent 12px);
+      z-index: 0;
     }
+    .step { position: relative; z-index: 1; }
     .step-dot {
-      width: 36px; height: 36px;
-      border-radius: 50%;
-      background: var(--rust);
-      color: var(--white);
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--rust); color: var(--white);
       display: flex; align-items: center; justify-content: center;
-      font-weight: 600; font-size: 0.85rem;
-      margin-bottom: 1.2rem;
+      font-weight: 600; font-size: 0.82rem; margin-bottom: 1.3rem;
+      box-shadow: 0 0 0 5px rgba(192,82,43,0.1);
     }
     .step h3 {
       font-family: 'Fraunces', serif;
-      font-size: 1.1rem; font-weight: 600;
-      color: var(--iron); margin-bottom: 0.5rem;
+      font-size: 1.05rem; font-weight: 600;
+      color: var(--iron); margin-bottom: 0.45rem;
     }
-    .step p { font-size: 0.9rem; color: var(--iron-mid); line-height: 1.65; }
+    .step p { font-size: 0.87rem; color: var(--iron-mid); line-height: 1.65; }
 
-    /* TESTIMONIALS */
+    /* ===================== PRIDE SECTION ===================== */
+    .pride-section {
+      background: linear-gradient(135deg, var(--iron) 0%, #1e1e1a 100%);
+      padding: 6rem 2.5rem;
+      position: relative; overflow: hidden;
+    }
+    .pride-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+    .pride-inner {
+      max-width: 1120px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr auto 1fr;
+      gap: 4rem; align-items: center;
+      position: relative; z-index: 1;
+    }
+    .pride-photo-wrap {
+      display: flex; flex-direction: column; align-items: center; gap: 1rem;
+    }
+    .pride-photo {
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      border: 4px solid rgba(255,255,255,0.12);
+      overflow: hidden;
+      box-shadow: 0 0 0 8px rgba(192,82,43,0.12), 0 20px 60px rgba(0,0,0,0.4);
+      opacity: 0;
+      transition: opacity 1.2s ease, transform 1.2s ease;
+      transform: scale(0.92);
+      background: rgba(255,255,255,0.06);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .pride-photo.visible {
+      opacity: 1; transform: scale(1);
+    }
+    .pride-photo img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .pride-photo-placeholder {
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      color: rgba(255,255,255,0.3); text-align: center;
+    }
+    .pride-photo-placeholder svg { width: 36px; height: 36px; opacity: 0.4; }
+    .pride-photo-placeholder span { font-size: 0.72rem; line-height: 1.4; max-width: 120px; }
+    .pride-photo-name {
+      font-family: 'Fraunces', serif;
+      font-size: 1rem; font-weight: 600;
+      color: rgba(255,255,255,0.7);
+      text-align: center;
+    }
+    .pride-photo-title { font-size: 0.78rem; color: rgba(255,255,255,0.4); text-align: center; }
+
+    @media (max-width: 1024px) {
+      .pride-inner { grid-template-columns: 1fr 1fr; }
+      .pride-photo-wrap { display: none; }
+    }
+    .pride-left .section-title { color: var(--white); }
+    .pride-left p {
+      color: rgba(255,255,255,0.6); font-size: 1rem;
+      line-height: 1.75; margin-top: 1.2rem; font-weight: 300;
+    }
+    .pride-stats {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1rem; margin-top: 2.5rem;
+    }
+    .pride-stat {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+    }
+    .pride-stat-num {
+      font-family: 'Fraunces', serif;
+      font-size: 2.6rem; font-weight: 700;
+      color: var(--white); line-height: 1;
+      margin-bottom: 0.35rem;
+    }
+    .pride-stat-num span { color: var(--rust-light); }
+    .pride-stat-label { font-size: 0.82rem; color: rgba(255,255,255,0.45); line-height: 1.4; }
+    .pride-right {
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+    .pride-point {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-left: 3px solid var(--rust);
+      border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+      padding: 1.4rem 1.6rem;
+      transition: background 0.2s;
+    }
+    .pride-point:hover { background: rgba(255,255,255,0.06); }
+    .pride-point h4 {
+      font-family: 'Fraunces', serif;
+      font-size: 1rem; font-weight: 600;
+      color: var(--white); margin-bottom: 0.35rem;
+    }
+    .pride-point p { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
+
+    /* ===================== TESTIMONIALS ===================== */
     .testimonials-bg { background: var(--sand); }
     .testimonials-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem; margin-top: 3rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
     }
     .testimonial-card {
       background: var(--white);
-      border-radius: 10px;
-      padding: 1.8rem;
+      border-radius: var(--radius-lg);
+      padding: 2rem;
       border: 1px solid rgba(44,44,40,0.07);
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.25s, box-shadow 0.25s;
+      display: flex; flex-direction: column;
     }
-    .testimonial-stars { color: #E8A020; font-size: 1rem; margin-bottom: 1rem; }
+    .testimonial-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .testimonial-stars { color: #E8A020; font-size: 0.9rem; margin-bottom: 1.1rem; letter-spacing: 1px; }
     .testimonial-text {
       font-family: 'Fraunces', serif;
-      font-size: 1rem; font-style: italic;
-      color: var(--iron); line-height: 1.65;
-      margin-bottom: 1.2rem;
+      font-size: 0.98rem; font-style: italic;
+      color: var(--iron); line-height: 1.7;
+      margin-bottom: 1.5rem; flex: 1;
     }
-    .testimonial-author { display: flex; align-items: center; gap: 0.75rem; }
+    .testimonial-author { display: flex; align-items: center; gap: 0.8rem; padding-top: 1.2rem; border-top: 1px solid rgba(44,44,40,0.07); }
     .testimonial-av {
-      width: 38px; height: 38px; border-radius: 50%;
+      width: 40px; height: 40px; border-radius: 50%;
       background: var(--oak);
       display: flex; align-items: center; justify-content: center;
-      color: var(--white); font-weight: 600; font-size: 0.8rem;
+      color: var(--white); font-weight: 600; font-size: 0.78rem;
+      flex-shrink: 0;
     }
     .testimonial-av.v2 { background: var(--iron-mid); }
     .testimonial-av.v3 { background: var(--rust); }
-    .testimonial-name { font-weight: 500; font-size: 0.9rem; }
-    .testimonial-trade { font-size: 0.8rem; color: var(--iron-light); }
+    .testimonial-name { font-weight: 600; font-size: 0.88rem; }
+    .testimonial-trade { font-size: 0.78rem; color: var(--iron-light); margin-top: 0.1rem; }
 
-    /* PRICING */
+    /* ===================== PRICING ===================== */
     .pricing-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem; margin-top: 3rem; align-items: start;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem; align-items: start;
     }
     .pricing-card {
-      border-radius: 10px;
-      padding: 2rem;
+      border-radius: var(--radius-lg);
+      padding: 2.2rem;
       border: 1px solid rgba(44,44,40,0.1);
+      background: var(--white);
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.25s, box-shadow 0.25s;
     }
+    .pricing-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
     .pricing-card.featured {
       background: var(--iron);
       border-color: var(--iron);
+      position: relative;
+    }
+    .pricing-card.featured::before {
+      content: 'Mest populær';
+      position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+      background: var(--rust); color: var(--white);
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; padding: 0.3rem 1rem;
+      border-radius: 100px;
     }
     .pricing-tag {
       display: inline-block;
-      font-size: 0.75rem; font-weight: 500;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      padding: 0.3rem 0.7rem;
-      border-radius: 4px;
-      background: rgba(192,82,43,0.12);
-      color: var(--rust);
-      margin-bottom: 1rem;
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.09em; text-transform: uppercase;
+      padding: 0.3rem 0.75rem; border-radius: 100px;
+      background: var(--rust-pale); color: var(--rust);
+      margin-bottom: 1.2rem;
     }
-    .featured .pricing-tag {
-      background: rgba(192,82,43,0.25);
-      color: var(--rust-light);
-    }
+    .featured .pricing-tag { background: rgba(192,82,43,0.22); color: var(--rust-light); }
     .pricing-card h3 {
       font-family: 'Fraunces', serif;
-      font-size: 1.3rem; font-weight: 700;
-      color: var(--iron); margin-bottom: 0.4rem;
+      font-size: 1.35rem; font-weight: 700;
+      color: var(--iron); margin-bottom: 0.35rem;
     }
     .featured h3 { color: var(--white); }
     .pricing-price {
       font-family: 'Fraunces', serif;
-      font-size: 2.4rem; font-weight: 700;
-      color: var(--iron); line-height: 1;
-      margin-bottom: 0.2rem;
+      font-size: 2.6rem; font-weight: 700;
+      color: var(--iron); line-height: 1; margin-bottom: 0.15rem;
     }
     .featured .pricing-price { color: var(--white); }
-    .pricing-period { font-size: 0.85rem; color: var(--iron-light); margin-bottom: 1.4rem; }
-    .featured .pricing-period { color: rgba(255,255,255,0.5); }
-    .pricing-divider { height: 1px; background: rgba(44,44,40,0.1); margin-bottom: 1.4rem; }
+    .pricing-period { font-size: 0.82rem; color: var(--iron-light); margin-bottom: 1.6rem; }
+    .featured .pricing-period { color: rgba(255,255,255,0.45); }
+    .pricing-divider { height: 1px; background: rgba(44,44,40,0.09); margin-bottom: 1.5rem; }
     .featured .pricing-divider { background: rgba(255,255,255,0.1); }
-    .pricing-features { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; margin-bottom: 1.8rem; }
+    .pricing-features { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem; }
     .pricing-features li {
-      display: flex; align-items: flex-start; gap: 0.6rem;
-      font-size: 0.9rem; color: var(--iron-mid);
+      display: flex; align-items: flex-start; gap: 0.65rem;
+      font-size: 0.88rem; color: var(--iron-mid);
     }
-    .featured .pricing-features li { color: rgba(255,255,255,0.7); }
-    .pricing-features li::before {
-      content: '✓';
-      color: var(--rust); font-weight: 600;
+    .featured .pricing-features li { color: rgba(255,255,255,0.65); }
+    .check-icon {
+      width: 18px; height: 18px; border-radius: 50%;
+      background: rgba(192,82,43,0.1);
+      display: flex; align-items: center; justify-content: center;
       flex-shrink: 0; margin-top: 1px;
     }
-    .featured .pricing-features li::before { color: var(--rust-light); }
+    .check-icon::after { content: '✓'; color: var(--rust); font-size: 0.65rem; font-weight: 700; }
+    .featured .check-icon { background: rgba(192,82,43,0.22); }
+    .featured .check-icon::after { color: var(--rust-light); }
     .pricing-btn {
       display: block; text-align: center;
-      padding: 0.8rem;
-      border-radius: var(--radius);
-      text-decoration: none;
-      font-weight: 500; font-size: 0.95rem;
-      transition: all 0.2s;
+      padding: 0.85rem; border-radius: var(--radius);
+      text-decoration: none; font-weight: 500; font-size: 0.92rem;
+      transition: all 0.2s; cursor: pointer; border: none; font-family: 'DM Sans', sans-serif;
+      width: 100%;
     }
     .pricing-btn-outline {
-      border: 1.5px solid var(--iron);
-      color: var(--iron);
+      border: 1.5px solid rgba(44,44,40,0.2);
+      color: var(--iron); background: transparent;
     }
-    .pricing-btn-outline:hover { background: var(--iron); color: var(--white); }
+    .pricing-btn-outline:hover { border-color: var(--iron); background: rgba(44,44,40,0.04); }
     .pricing-btn-solid {
-      background: var(--rust);
-      color: var(--white);
+      background: var(--rust); color: var(--white);
+      box-shadow: 0 4px 14px rgba(192,82,43,0.3);
     }
-    .pricing-btn-solid:hover { background: var(--rust-light); }
+    .pricing-btn-solid:hover { background: var(--rust-light); box-shadow: 0 6px 18px rgba(192,82,43,0.35); }
 
-    /* CTA */
-    .cta-section {
-      background: var(--sand);
-      padding: 5rem 2rem;
-      text-align: center;
-    }
-    .cta-inner { max-width: 600px; margin: 0 auto; }
-    .cta-inner .section-title { margin: 0 auto 1rem; }
-    .cta-inner .section-sub { margin: 0 auto 2.2rem; }
+    /* ===================== CTA ===================== */
+    .cta-section { background: var(--sand); padding: 6rem 2.5rem; }
+    .cta-inner { max-width: 640px; margin: 0 auto; text-align: center; }
+    .cta-inner .section-title { margin-bottom: 1rem; }
+    .cta-inner .section-sub { margin: 0 auto 2.4rem; }
     .cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-
-    /* CONTACT */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem; align-items: start;
-      margin-top: 3rem;
+    .cta-note {
+      margin-top: 1.2rem;
+      font-size: 0.8rem; color: var(--iron-light);
+      display: flex; align-items: center; justify-content: center; gap: 0.4rem;
     }
-    .contact-info p { color: var(--iron-mid); line-height: 1.7; margin-bottom: 2rem; }
+    .cta-note::before { content: '🔒'; font-size: 0.85rem; }
+
+    /* ===================== CONTACT ===================== */
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1.4fr;
+      gap: 5rem; align-items: start; margin-top: 3rem;
+    }
+    .contact-info p { color: var(--iron-mid); line-height: 1.75; margin-bottom: 2.2rem; font-size: 1rem; font-weight: 300; }
     .contact-items { display: flex; flex-direction: column; gap: 1rem; }
-    .contact-item { display: flex; align-items: center; gap: 0.75rem; }
+    .contact-item { display: flex; align-items: center; gap: 0.8rem; }
     .contact-item-icon {
-      width: 36px; height: 36px;
-      background: var(--sand);
-      border-radius: var(--radius);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
+      width: 38px; height: 38px;
+      background: var(--sand); border-radius: var(--radius);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      border: 1px solid rgba(44,44,40,0.08);
     }
     .contact-item-icon svg { width: 16px; height: 16px; stroke: var(--iron-mid); fill: none; stroke-width: 1.8; }
-    .contact-item-text { font-size: 0.95rem; color: var(--iron-mid); }
+    .contact-item-text { font-size: 0.92rem; color: var(--iron-mid); font-weight: 400; }
+    .contact-promise {
+      margin-top: 2rem; padding: 1.2rem 1.4rem;
+      background: var(--rust-pale);
+      border: 1px solid rgba(192,82,43,0.15);
+      border-radius: var(--radius);
+    }
+    .contact-promise p { font-size: 0.85rem; color: var(--rust); font-weight: 500; margin: 0; line-height: 1.5; }
 
-    form { display: flex; flex-direction: column; gap: 1rem; }
+    /* FORM */
+    .form-card {
+      background: var(--sand);
+      border-radius: var(--radius-lg);
+      padding: 2.4rem;
+      border: 1px solid rgba(44,44,40,0.08);
+      box-shadow: var(--shadow-sm);
+    }
+    .form-card h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.2rem; font-weight: 600;
+      color: var(--iron); margin-bottom: 1.6rem;
+    }
+    form { display: flex; flex-direction: column; gap: 1.1rem; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    label { font-size: 0.85rem; color: var(--iron-mid); font-weight: 500; display: block; margin-bottom: 0.35rem; }
+    .form-group { display: flex; flex-direction: column; }
+    label {
+      font-size: 0.8rem; color: var(--iron-mid); font-weight: 500;
+      display: block; margin-bottom: 0.4rem; letter-spacing: 0.01em;
+    }
     input, select, textarea {
       width: 100%;
-      padding: 0.7rem 0.9rem;
-      border: 1px solid rgba(44,44,40,0.18);
+      padding: 0.8rem 1rem;
+      border: 1.5px solid rgba(44,44,40,0.14);
       border-radius: var(--radius);
       font-family: 'DM Sans', sans-serif;
-      font-size: 0.95rem;
-      color: var(--iron);
+      font-size: 0.93rem; color: var(--iron);
       background: var(--white);
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, box-shadow 0.2s;
       appearance: none;
     }
     input:focus, select:focus, textarea:focus {
       outline: none;
       border-color: var(--rust);
+      box-shadow: 0 0 0 3px rgba(192,82,43,0.08);
     }
-    textarea { resize: vertical; min-height: 120px; }
+    textarea { resize: vertical; min-height: 110px; }
     .form-submit {
-      background: var(--rust);
-      color: var(--white);
+      background: var(--rust); color: var(--white);
       border: none; cursor: pointer;
-      padding: 0.85rem;
-      border-radius: var(--radius);
+      padding: 1rem; border-radius: var(--radius);
       font-family: 'DM Sans', sans-serif;
       font-size: 1rem; font-weight: 500;
-      transition: background 0.2s;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 4px 14px rgba(192,82,43,0.25);
     }
-    .form-submit:hover { background: var(--rust-light); }
+    .form-submit:hover { background: var(--rust-light); transform: translateY(-1px); box-shadow: 0 6px 18px rgba(192,82,43,0.32); }
+    .form-submit:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+    .form-disclaimer { font-size: 0.76rem; color: var(--iron-light); text-align: center; }
 
-    /* FOOTER */
-    footer {
-      background: var(--iron);
-      color: rgba(255,255,255,0.5);
-      padding: 2.5rem 2rem;
-    }
+    /* ===================== FOOTER ===================== */
+    footer { background: var(--iron); color: rgba(255,255,255,0.45); padding: 2.8rem 2.5rem; }
     .footer-inner {
-      max-width: 1100px; margin: 0 auto;
+      max-width: 1120px; margin: 0 auto;
       display: flex; justify-content: space-between;
       align-items: center; flex-wrap: wrap; gap: 1rem;
     }
     .footer-logo {
       font-family: 'Fraunces', serif;
-      font-size: 1.2rem; font-weight: 700;
+      font-size: 1.25rem; font-weight: 700;
       color: var(--white); text-decoration: none;
     }
     .footer-logo span { color: var(--rust-light); }
-    .footer-text { font-size: 0.85rem; }
+    .footer-text { font-size: 0.82rem; }
 
-    /* MOBILE */
+    /* ===================== MODAL ===================== */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 999;
+      background: rgba(44,44,40,0.65);
+      backdrop-filter: blur(6px);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s;
+      padding: 1rem;
+    }
+    .modal-overlay.active { opacity: 1; pointer-events: all; }
+    .modal-box {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 2.8rem 2.4rem;
+      max-width: 440px; width: 100%;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+      transform: scale(0.92) translateY(10px);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+    }
+    .modal-overlay.active .modal-box { transform: scale(1) translateY(0); }
+    .modal-icon {
+      width: 64px; height: 64px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.4rem;
+      font-size: 1.8rem;
+    }
+    .modal-icon.success { background: rgba(192,82,43,0.1); }
+    .modal-icon.error { background: rgba(192,82,43,0.08); }
+    .modal-box h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.5rem; font-weight: 700;
+      color: var(--iron); margin-bottom: 0.7rem;
+      letter-spacing: -0.02em;
+    }
+    .modal-box p { font-size: 0.93rem; color: var(--iron-mid); line-height: 1.7; margin-bottom: 1.8rem; }
+    .modal-close {
+      background: var(--iron); color: var(--white);
+      border: none; cursor: pointer;
+      padding: 0.8rem 2rem; border-radius: var(--radius);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.92rem; font-weight: 500;
+      transition: background 0.2s;
+    }
+    .modal-close.rust-btn { background: var(--rust); }
+    .modal-close.rust-btn:hover { background: var(--rust-light); }
+    .modal-close:hover { background: var(--iron-mid); }
+    .modal-x {
+      position: absolute; top: 1rem; right: 1.2rem;
+      background: none; border: none; cursor: pointer;
+      font-size: 1.2rem; color: var(--iron-light);
+      line-height: 1; padding: 0.3rem;
+    }
+    .modal-x:hover { color: var(--iron); }
+
+    /* ===================== MOBILE MENU ===================== */
+    .hamburger {
+      display: none;
+      flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 4px; background: none; border: none;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--iron); border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed; top: 70px; left: 0; right: 0; bottom: 0;
+      z-index: 150;
+      background: var(--iron);
+      flex-direction: column;
+      padding: 2rem 2rem 3rem;
+      gap: 0;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .mobile-menu.open { transform: translateX(0); }
+    .mobile-menu a {
+      display: flex; align-items: center; justify-content: space-between;
+      text-decoration: none;
+      color: rgba(255,255,255,0.75);
+      font-family: 'Fraunces', serif;
+      font-size: 1.6rem; font-weight: 600;
+      padding: 1.1rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      letter-spacing: -0.02em;
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--white); }
+    .mobile-menu a::after { content: '→'; font-family: 'DM Sans', sans-serif; font-size: 1rem; opacity: 0.4; }
+    .mobile-menu-cta {
+      margin-top: auto;
+      padding-top: 2rem;
+    }
+    .mobile-menu-cta a {
+      display: block !important; text-align: center;
+      background: var(--rust) !important;
+      color: var(--white) !important;
+      border-radius: var(--radius);
+      padding: 1rem 2rem !important;
+      font-family: 'DM Sans', sans-serif !important;
+      font-size: 1rem !important; font-weight: 500 !important;
+      border: none !important;
+      justify-content: center !important;
+    }
+    .mobile-menu-cta a::after { display: none !important; }
+    .mobile-menu-logo {
+      font-family: 'Fraunces', serif;
+      font-size: 1rem; font-weight: 700;
+      color: rgba(255,255,255,0.3);
+      margin-top: 1.5rem;
+      text-align: center;
+    }
+    .mobile-menu-logo span { color: var(--rust-light); }
+    /* ===================== ANIMATIONS ===================== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+    /* cursor blink handled via JS */
+
+    .hero-eyebrow { animation: fadeUp 0.6s ease 0.1s both; }
+    .hero h1      { animation: fadeUp 0.6s ease 0.2s both; }
+    .hero-sub     { animation: fadeUp 0.6s ease 0.35s both; }
+    .hero-actions { animation: fadeUp 0.6s ease 0.45s both; }
+    .hero-guarantee { animation: fadeUp 0.6s ease 0.55s both; }
+    .hero-visual  { animation: fadeUp 0.7s ease 0.3s both; }
+
+    .reveal {
+      opacity: 0; transform: translateY(18px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ===================== RESPONSIVE ===================== */
+    @media (max-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .crafts-grid { grid-template-columns: repeat(3, 1fr); }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 400px; }
+      .pride-inner { grid-template-columns: 1fr; gap: 3rem; }
+    }
     @media (max-width: 768px) {
-      .hero { grid-template-columns: 1fr; gap: 2.5rem; padding-top: 110px; }
-      .hero-visual { order: -1; }
+      nav { padding: 0 1.5rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .mobile-menu { display: flex; }
+      .hero { padding: 110px 1.5rem 60px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .hero-visual { order: 1; }
+      .hero h1 { font-size: 2.2rem; }
+      .section { padding: 4rem 1.5rem; }
+      .crafts-section { padding: 3rem 1.5rem; }
+      .crafts-grid { grid-template-columns: repeat(2, 1fr); }
+      .services-grid { grid-template-columns: 1fr; }
+      .steps-track { grid-template-columns: 1fr 1fr; }
+      .steps-track::before { display: none; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .pricing-grid { max-width: none; grid-template-columns: 1fr; }
       .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .form-row { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
-      .step:not(:last-child)::after { display: none; }
+      .pride-stats { grid-template-columns: 1fr 1fr; }
+      .pride-photo-wrap { display: none; }
     }
-
-    /* ANIMATIONS */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    @media (max-width: 480px) {
+      .crafts-grid { grid-template-columns: repeat(2, 1fr); }
+      .steps-track { grid-template-columns: 1fr; }
     }
-    .hero-eyebrow, .hero h1, .hero-sub, .hero-actions {
-      animation: fadeUp 0.6s ease both;
-    }
-    .hero-eyebrow { animation-delay: 0.1s; }
-    .hero h1 { animation-delay: 0.2s; }
-    .hero-sub { animation-delay: 0.3s; }
-    .hero-actions { animation-delay: 0.4s; }
-    .hero-visual { animation: fadeUp 0.7s ease 0.3s both; }
   </style>
 </head>
 <body>
 
 <!-- NAV -->
-<nav>
+<nav id="main-nav">
   <a href="#" class="nav-logo">Mester<span>Greb</span></a>
   <div class="nav-links">
     <a href="#ydelser">Ydelser</a>
     <a href="#hvordan">Sådan virker det</a>
     <a href="#priser">Priser</a>
-    <a href="#kontakt" class="nav-cta">Kom i gang</a>
+    <a href="#kontakt" class="nav-cta">Book gratis snak</a>
   </div>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#ydelser" onclick="closeMobileMenu()">Ydelser</a>
+  <a href="#hvordan" onclick="closeMobileMenu()">Sådan virker det</a>
+  <a href="#priser" onclick="closeMobileMenu()">Priser</a>
+  <a href="#kontakt" onclick="closeMobileMenu()">Kontakt</a>
+  <div class="mobile-menu-cta">
+    <a href="#kontakt" onclick="closeMobileMenu()">Book gratis snak →</a>
+  </div>
+  <div class="mobile-menu-logo">Mester<span>Greb</span></div>
+</div>
+
 <!-- HERO -->
-<section style="background: var(--white);">
-  <div class="hero">
+<section class="hero">
+  <div class="hero-inner">
     <div>
       <p class="hero-eyebrow">Kun for håndværkere</p>
-      <h1>Mere tid til<br><em>det du er</em><br>god til</h1>
-      <p class="hero-sub">MesterGreb hjælper håndværkere med at tiltrække nye opgaver, følge op på tilbud automatisk og bygge et stærkt omdømme på Google — uden du skal bruge tid på det.</p>
+      <h1>
+        <span class="static">Når et digitalt samarbejde giver</span>
+        <span class="typewriter-wrap"><span id="typewriter" class="typewriter-text">flere opgaver</span></span>
+      </h1>
+      <p class="hero-sub">Vi sætter de digitale systemer op, der fylder din kalender med konkrete opgaver — ikke bare hjemmesidebesøg. Ingen binding, ingen teknisk viden nødvendig.</p>
       <div class="hero-actions">
         <a href="#kontakt" class="btn-primary">Book en gratis snak</a>
-        <a href="#ydelser" class="btn-secondary">Se hvad vi tilbyder</a>
+        <a href="#ydelser" class="btn-ghost">Se hvad vi tilbyder</a>
+      </div>
+      <div class="hero-guarantee">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>Ingen binding — ingen skjulte gebyrer — faktiske opgaver, ikke bare besøg</span>
       </div>
     </div>
     <div class="hero-visual">
       <div class="hero-card">
+        <div class="hero-card-badge">Live dashboard</div>
         <div class="hero-card-header">
           <div class="hero-avatar">KN</div>
           <div>
             <div class="hero-card-name">Klaus Nielsen</div>
-            <div class="hero-card-trade">VVS-mester</div>
+            <div class="hero-card-trade">VVS-mester · Aktiv kunde</div>
           </div>
         </div>
         <div class="hero-stats">
@@ -562,7 +963,7 @@
             <div class="hero-stat-label">nye opgaver i oktober</div>
           </div>
           <div class="hero-stat">
-            <div class="hero-stat-num">4.9</div>
+            <div class="hero-stat-num">4.9★</div>
             <div class="hero-stat-label">Google-bedømmelse</div>
           </div>
           <div class="hero-stat">
@@ -570,8 +971,8 @@
             <div class="hero-stat-label">tilbud accepteret</div>
           </div>
           <div class="hero-stat">
-            <div class="hero-stat-num">0</div>
-            <div class="hero-stat-label">timer brugt på opfølgning</div>
+            <div class="hero-stat-num">0t</div>
+            <div class="hero-stat-label">brugt på opfølgning</div>
           </div>
         </div>
         <div class="hero-review">
@@ -582,16 +983,72 @@
       </div>
     </div>
   </div>
-  <div class="trust-bar">
-    <span class="trust-label">Bygget til</span>
-    <div class="trust-divider"></div>
-    <div class="trust-items">
-      <span class="trust-item">Murere</span>
-      <span class="trust-item">VVS'ere</span>
-      <span class="trust-item">Elektrikere</span>
-      <span class="trust-item">Malere</span>
-      <span class="trust-item">Tømrere</span>
-      <span class="trust-item">Snedkere</span>
+</section>
+
+<!-- CRAFTS / SOCIAL PROOF -->
+<section class="crafts-section">
+  <div class="crafts-inner">
+    <p class="crafts-label">Bygget til disse fag</p>
+    <div class="crafts-grid">
+      <div class="craft-box reveal">
+        <div class="craft-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#C0522B" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="18" rx="2"/>
+            <path d="M8 3v18M16 3v18M2 12h20"/>
+          </svg>
+        </div>
+        <div class="craft-name">Murer</div>
+        <div class="craft-count">Fundamenter & facader</div>
+      </div>
+      <div class="craft-box reveal">
+        <div class="craft-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#C0522B" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a5 5 0 0 1 5 5c0 6-5 11-5 11S7 13 7 7a5 5 0 0 1 5-5z"/>
+            <circle cx="12" cy="7" r="2"/>
+          </svg>
+        </div>
+        <div class="craft-name">VVS-mester</div>
+        <div class="craft-count">Rør & installationer</div>
+      </div>
+      <div class="craft-box reveal">
+        <div class="craft-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#C0522B" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/>
+          </svg>
+        </div>
+        <div class="craft-name">Elektriker</div>
+        <div class="craft-count">El & sikring</div>
+      </div>
+      <div class="craft-box reveal">
+        <div class="craft-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#C0522B" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 18v-5a9 9 0 0 1 18 0v5"/>
+            <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3v5z"/>
+            <path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3v5z"/>
+          </svg>
+        </div>
+        <div class="craft-name">Maler</div>
+        <div class="craft-count">Indvendigt & udvendigt</div>
+      </div>
+      <div class="craft-box reveal">
+        <div class="craft-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#C0522B" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </div>
+        <div class="craft-name">Tømrer</div>
+        <div class="craft-count">Konstruktion & renovering</div>
+      </div>
+      <div class="craft-box reveal">
+        <div class="craft-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#C0522B" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+          </svg>
+        </div>
+        <div class="craft-name">Snedker</div>
+        <div class="craft-count">Møbler & finishningsmenter</div>
+      </div>
     </div>
   </div>
 </section>
@@ -599,37 +1056,39 @@
 <!-- PROBLEM -->
 <section class="section">
   <div class="section-inner">
-    <p class="section-label">Det vi løser</p>
-    <h2 class="section-title">Du er ekspert i dit fag.<br>Ikke i markedsføring.</h2>
-    <p class="section-sub">De fleste håndværkere mister opgaver — ikke fordi de ikke er gode nok, men fordi de ikke har tid eller redskaber til at følge op.</p>
+    <div class="section-header">
+      <p class="section-label">Det vi løser</p>
+      <h2 class="section-title">Du er ekspert i dit fag.<br>Ikke i markedsføring.</h2>
+      <p class="section-sub">De fleste håndværkere mister opgaver — ikke fordi de ikke er gode nok, men fordi de ikke har redskaberne til at vinde dem.</p>
+    </div>
     <div class="problem-grid">
-      <div class="problem-card">
+      <div class="problem-card reveal">
         <div class="problem-icon">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         </div>
-        <h3>Tilbud der aldrig bliver fulgt op</h3>
-        <p>Du sender tilbuddet — og hører aldrig mere. En automatisk opfølgning ville have vundet den opgave.</p>
+        <h3>Tilbud der aldrig vendes</h3>
+        <p>Du sender tilbuddet — og hører aldrig mere. Automatisk opfølgning havde vundet den opgave for dig.</p>
       </div>
-      <div class="problem-card">
+      <div class="problem-card reveal">
         <div class="problem-icon">
           <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
-        <h3>Ingen nye kunder uden mund-til-mund</h3>
-        <p>Rygte og anbefalinger er guld — men de fleste tilfredse kunder glemmer at lægge en anmeldelse.</p>
+        <h3>Ingen kunder uden mund-til-mund</h3>
+        <p>Tilfredse kunder er guld — men de glemmer at lægge anmeldelsen. Systemet husker det for dig.</p>
       </div>
-      <div class="problem-card">
+      <div class="problem-card reveal">
         <div class="problem-icon">
           <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         </div>
         <h3>Usynlig på Google</h3>
-        <p>Kunder søger lokalt. Hvis din Google-profil ikke er sat korrekt op, finder de din konkurrent i stedet.</p>
+        <p>Kunder søger lokalt. Hvis din Google-profil ikke er sat korrekt op, finder de din konkurrent i stedet for dig.</p>
       </div>
-      <div class="problem-card">
+      <div class="problem-card reveal">
         <div class="problem-icon">
-          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
         </div>
-        <h3>Hjemmeside der ikke virker</h3>
-        <p>Mange håndværkere har ingen hjemmeside — eller en der ikke skaber tillid og får folk til at ringe.</p>
+        <h3>Hjemmeside der sender folk væk</h3>
+        <p>Ingen hjemmeside — eller en der ikke skaber tillid. Kunden ringer videre til den næste i søgeresultater.</p>
       </div>
     </div>
   </div>
@@ -638,39 +1097,59 @@
 <!-- SERVICES -->
 <section class="section services-bg" id="ydelser">
   <div class="section-inner">
-    <p class="section-label">Vores ydelser</p>
-    <h2 class="section-title">Alt hvad du behøver.<br>Intet du ikke gør.</h2>
-    <p class="section-sub">Vi sætter systemerne op — du fokuserer på opgaverne.</p>
+    <div class="section-header">
+      <p class="section-label">Vores ydelser</p>
+      <h2 class="section-title">Alt hvad du behøver.<br>Intet du ikke gør.</h2>
+      <p class="section-sub">Vi sætter systemerne op — du modtager opgaverne.</p>
+    </div>
     <div class="services-grid">
-      <div class="service-card">
-        <div class="service-num">01</div>
-        <h3>Flere nye opgaver</h3>
-        <p>Vi sørger for, at potentielle kunder i dit område finder dig — og tager kontakt. Du modtager konkrete henvendelser, klar til at give tilbud.</p>
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.38A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 8 8l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 18z"/></svg>
+        </div>
+        <h3>Nye opgaver i dit område</h3>
+        <p>Potentielle kunder i dit nærområde finder dig og tager kontakt. Du modtager henvendelser, klar til at give tilbud.</p>
+        <div class="service-result">Konkrete forespørgsler — ikke bare besøg</div>
       </div>
-      <div class="service-card">
-        <div class="service-num">02</div>
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
         <h3>Automatisk tilbudsopfølgning</h3>
-        <p>Sender du et tilbud, følger systemet automatisk op pr. SMS og mail. Du vinder flere opgaver uden at løfte en finger.</p>
+        <p>Systemet følger automatisk op pr. SMS og mail efter dit tilbud. Du vinder flere opgaver uden at løfte en finger.</p>
+        <div class="service-result">Op til 40% flere accepterede tilbud</div>
       </div>
-      <div class="service-card">
-        <div class="service-num">03</div>
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
         <h3>Google-anmeldelser på autopilot</h3>
-        <p>Når opgaven er færdig, beder vi kunden automatisk om en anmeldelse. Dit omdømme vokser mens du arbejder.</p>
+        <p>Når opgaven er færdig, beder systemet kunden om en anmeldelse. Dit omdømme vokser mens du arbejder.</p>
+        <div class="service-result">Fra 5 til 40+ anmeldelser på 2 måneder</div>
       </div>
-      <div class="service-card">
-        <div class="service-num">04</div>
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
         <h3>Professionel Google-profil</h3>
-        <p>Vi sætter din Google Business-profil korrekt op med billeder, beskrivelser og åbningstider — så du skiller dig ud lokalt.</p>
+        <p>Vi sætter din Google Business-profil korrekt op med billeder og beskrivelser — så du skiller dig ud lokalt.</p>
+        <div class="service-result">Synlig for lokale søgninger fra dag 1</div>
       </div>
-      <div class="service-card">
-        <div class="service-num">05</div>
-        <h3>Professionel hjemmeside</h3>
-        <p>En klar og troværdig hjemmeside der viser hvem du er, hvad du laver, og gør det nemt for kunder at kontakte dig.</p>
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <h3>Hjemmeside der skaber tillid</h3>
+        <p>En klar og troværdig hjemmeside der viser hvem du er, hvad du laver, og gør det nemt at kontakte dig.</p>
+        <div class="service-result">Kunder ringer — ikke surfer videre</div>
       </div>
-      <div class="service-card">
-        <div class="service-num">06</div>
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
         <h3>Samlet overblik</h3>
-        <p>Alle dine kundehenvendelser og anmeldelser samlet ét sted. Aldrig mere overblik over hvad der sker i din forretning.</p>
+        <p>Alle henvendelser og anmeldelser samlet ét sted. Aldrig mere overblik over hvad der sker i din forretning.</p>
+        <div class="service-result">Ét sted for alt — ingen rodet indbakke</div>
       </div>
     </div>
   </div>
@@ -679,29 +1158,90 @@
 <!-- HOW IT WORKS -->
 <section class="section" id="hvordan">
   <div class="section-inner">
-    <p class="section-label">Processen</p>
-    <h2 class="section-title">Klar på to uger.</h2>
-    <p class="section-sub">Vi gør det enkelt. Du behøver ikke være teknisk, og du behøver ikke bruge tid du ikke har.</p>
-    <div class="steps">
-      <div class="step">
+    <div class="section-header">
+      <p class="section-label">Processen</p>
+      <h2 class="section-title">Klar på to uger.</h2>
+      <p class="section-sub">Vi gør det enkelt. Du behøver ikke være teknisk, og du behøver ikke bruge tid du ikke har.</p>
+    </div>
+    <div class="steps-track">
+      <div class="step reveal">
         <div class="step-dot">1</div>
         <h3>Gratis snak</h3>
         <p>Vi tager en uforpligtende samtale og finder ud af hvad du har brug for. Ingen salg, bare ærlighed.</p>
       </div>
-      <div class="step">
+      <div class="step reveal">
         <div class="step-dot">2</div>
         <h3>Vi sætter det op</h3>
-        <p>Vi konfigurerer alle systemer, skriver tekster og sætter din profil op. Du godkender — og vi justerer.</p>
+        <p>Vi konfigurerer alle systemer og skriver teksterne. Du godkender — og vi justerer indtil det er rigtigt.</p>
       </div>
-      <div class="step">
+      <div class="step reveal">
         <div class="step-dot">3</div>
-        <h3>Du kører</h3>
-        <p>Systemet kører automatisk. Vi holder øje og optimerer løbende, så du kan fokusere på faget.</p>
+        <h3>Du modtager opgaver</h3>
+        <p>Systemet kører automatisk. Henvendelser og opfølgninger sker, mens du er ude på en opgave.</p>
       </div>
-      <div class="step">
+      <div class="step reveal">
         <div class="step-dot">4</div>
         <h3>Du vokser</h3>
-        <p>Flere opgaver, bedre omdømme og mere tid. Vi følger med og skalerer når du er klar.</p>
+        <p>Bedre omdømme, fyldt kalender og mere tid til faget. Vi følger med og optimerer løbende.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRIDE SECTION -->
+<section class="pride-section">
+  <div class="pride-inner">
+    <div class="pride-left">
+      <p class="section-label">Faglig stolthed</p>
+      <h2 class="section-title">Vi leverer resultater<br>baseret på respekt for håndværket.</h2>
+      <p>Vi arbejder kun med håndværkere. Ikke med advokater, tandlæger eller webshops. Vi forstår, at dit omdømme er opbygget over årtier med godt arbejde — og at du ikke vil sætte det over styr på et halvhjertet digitalt setup.</p>
+      <p style="margin-top: 1rem;">Derfor gør vi det ordentligt. Ligesom du gør.</p>
+      <div class="pride-stats">
+        <div class="pride-stat">
+          <div class="pride-stat-num"><span>+</span>180</div>
+          <div class="pride-stat-label">opgaver skaffet til aktive kunder seneste kvartal</div>
+        </div>
+        <div class="pride-stat">
+          <div class="pride-stat-num">4.8<span>★</span></div>
+          <div class="pride-stat-label">gennemsnitlig Google-bedømmelse hos vores kunder</div>
+        </div>
+        <div class="pride-stat">
+          <div class="pride-stat-num"><span>&lt;</span>2u</div>
+          <div class="pride-stat-label">den tid du bruger på opsætning</div>
+        </div>
+        <div class="pride-stat">
+          <div class="pride-stat-num">0</div>
+          <div class="pride-stat-label">måneder binding — stop når du vil</div>
+        </div>
+      </div>
+    </div>
+    <div class="pride-photo-wrap">
+      <div class="pride-photo" id="pride-photo">
+        <!-- Skift src til dit eget billede, fx: src="dit-billede.jpg" -->
+        <div class="pride-photo-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span>Indsæt dit billede her</span>
+        </div>
+      </div>
+      <div class="pride-photo-name">Dit navn</div>
+      <div class="pride-photo-title">Grundlægger, MesterGreb</div>
+    </div>
+    <div class="pride-right reveal">
+      <div class="pride-point">
+        <h4>Kun for håndværkere</h4>
+        <p>Vi forstår dit fag og din hverdag. Vores systemer er bygget til håndværkere — ikke generiske marketingløsninger pakket om.</p>
+      </div>
+      <div class="pride-point">
+        <h4>En god finish — digitalt som fysisk</h4>
+        <p>Du er stolt af dit håndværk. Vi er stolte af vores. Slurvede løsninger sender vi ikke afsted — vi justerer indtil det sidder rigtigt.</p>
+      </div>
+      <div class="pride-point">
+        <h4>Faktiske opgaver — ikke tomme tal</h4>
+        <p>Vi måler succes i konkrete opgaver og accepterede tilbud — ikke i hjemmesidebesøg eller likes på Facebook.</p>
+      </div>
+      <div class="pride-point">
+        <h4>Ingen binding, ingen overraskelser</h4>
+        <p>Du ved præcis hvad du betaler. Ingen skjulte gebyrer, ingen lange kontrakter. Du kan stoppe hvornår du vil.</p>
       </div>
     </div>
   </div>
@@ -710,10 +1250,12 @@
 <!-- TESTIMONIALS -->
 <section class="section testimonials-bg">
   <div class="section-inner">
-    <p class="section-label">Hvad de siger</p>
-    <h2 class="section-title">Fra håndværkere<br>der er kommet i gang.</h2>
+    <div class="section-header">
+      <p class="section-label">Hvad de siger</p>
+      <h2 class="section-title">Fra håndværkere<br>der er kommet i gang.</h2>
+    </div>
     <div class="testimonials-grid">
-      <div class="testimonial-card">
+      <div class="testimonial-card reveal">
         <div class="testimonial-stars">★★★★★</div>
         <p class="testimonial-text">"Jeg troede aldrig jeg ville have brug for den slags systemer — men det har gjort en kæmpe forskel. Jeg modtager henvendelser hver uge uden at gøre noget."</p>
         <div class="testimonial-author">
@@ -724,9 +1266,9 @@
           </div>
         </div>
       </div>
-      <div class="testimonial-card">
+      <div class="testimonial-card reveal">
         <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">"Mine Google-anmeldelser er gået fra 6 til 41 på to måneder. Kunderne kommenterer selv at de valgte mig pga. anmeldelserne."</p>
+        <p class="testimonial-text">"Mine Google-anmeldelser er gået fra 6 til 41 på to måneder. Kunderne fortæller mig selv, at de valgte mig på baggrund af anmeldelserne."</p>
         <div class="testimonial-author">
           <div class="testimonial-av v2">LB</div>
           <div>
@@ -735,9 +1277,9 @@
           </div>
         </div>
       </div>
-      <div class="testimonial-card">
+      <div class="testimonial-card reveal">
         <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">"Opfølgningen på tilbud var guld. Tre kunder sagde de havde glemt svare — og to af dem endte med at takke ja."</p>
+        <p class="testimonial-text">"Opfølgningen på tilbud var guld. Tre kunder sagde de havde glemt at svare — og to af dem endte med at takke ja. Den ene var en stor entrepriseopgave."</p>
         <div class="testimonial-author">
           <div class="testimonial-av v3">SJ</div>
           <div>
@@ -753,52 +1295,51 @@
 <!-- PRICING -->
 <section class="section" id="priser">
   <div class="section-inner">
-    <p class="section-label">Priser</p>
-    <h2 class="section-title">Enkel og gennemsigtig<br>prissætning.</h2>
-    <p class="section-sub">Ingen skjulte gebyrer. Ingen lange bindingsperioder. Du ved præcist hvad du betaler.</p>
+    <div class="section-header">
+      <p class="section-label">Priser</p>
+      <h2 class="section-title">Enkel og gennemsigtig<br>prissætning.</h2>
+      <p class="section-sub">Ingen skjulte gebyrer. Ingen bindingsperiode. Du ved præcist hvad du betaler — og du kan stoppe hvornår du vil.</p>
+    </div>
     <div class="pricing-grid">
-      <div class="pricing-card">
+      <div class="pricing-card reveal">
         <div class="pricing-tag">Kom i gang</div>
         <h3>Intro</h3>
-        <div class="pricing-price">1.497 kr</div>
-        <div class="pricing-period">per måned</div>
+        <p style="font-size:0.88rem;color:var(--iron-light);margin-bottom:1.6rem;">Automatisering og anmeldelser — det der giver mest med mindst indsats.</p>
         <div class="pricing-divider"></div>
         <ul class="pricing-features">
-          <li>Automatisk tilbudsopfølgning</li>
-          <li>Indsamling af Google-anmeldelser</li>
-          <li>Samlet indbakke for henvendelser</li>
-          <li>Opsætning inkluderet</li>
+          <li><span class="check-icon"></span>Automatisk tilbudsopfølgning</li>
+          <li><span class="check-icon"></span>Indsamling af Google-anmeldelser</li>
+          <li><span class="check-icon"></span>Samlet indbakke for henvendelser</li>
+          <li><span class="check-icon"></span>Opsætning inkluderet</li>
         </ul>
-        <a href="#kontakt" class="pricing-btn pricing-btn-outline">Book gratis snak</a>
+        <button class="pricing-btn pricing-btn-outline" onclick="openContact()">Bestil tilbud</button>
       </div>
-      <div class="pricing-card featured">
-        <div class="pricing-tag">Mest populær</div>
+      <div class="pricing-card featured reveal">
+        <div class="pricing-tag">Populær</div>
         <h3>Vækst</h3>
-        <div class="pricing-price">2.497 kr</div>
-        <div class="pricing-period">per måned</div>
+        <p style="font-size:0.88rem;color:rgba(255,255,255,0.5);margin-bottom:1.6rem;">Alt det du behøver for at vækste din forretning lokalt — fra dag ét.</p>
         <div class="pricing-divider"></div>
         <ul class="pricing-features">
-          <li>Alt i Intro-pakken</li>
-          <li>Tiltrækning af nye opgaver</li>
-          <li>Professionel Google-profil</li>
-          <li>Månedlig opfølgning og optimering</li>
-          <li>Prioriteret support</li>
+          <li><span class="check-icon"></span>Alt i Intro-pakken</li>
+          <li><span class="check-icon"></span>Tiltrækning af nye opgaver lokalt</li>
+          <li><span class="check-icon"></span>Professionel Google-profil</li>
+          <li><span class="check-icon"></span>Månedlig optimering & opfølgning</li>
+          <li><span class="check-icon"></span>Prioriteret support</li>
         </ul>
-        <a href="#kontakt" class="pricing-btn pricing-btn-solid">Book gratis snak</a>
+        <button class="pricing-btn pricing-btn-solid" onclick="openContact()">Bestil tilbud</button>
       </div>
-      <div class="pricing-card">
+      <div class="pricing-card reveal">
         <div class="pricing-tag">Komplet løsning</div>
         <h3>Mester</h3>
-        <div class="pricing-price">Fra 4.997 kr</div>
-        <div class="pricing-period">engangspris + månedlig</div>
+        <p style="font-size:0.88rem;color:var(--iron-light);margin-bottom:1.6rem;">Den fulde pakke — inkl. professionel hjemmeside og løbende vedligeholdelse.</p>
         <div class="pricing-divider"></div>
         <ul class="pricing-features">
-          <li>Alt i Vækst-pakken</li>
-          <li>Professionel hjemmeside</li>
-          <li>Tekstforfatning og billeder</li>
-          <li>Løbende vedligeholdelse</li>
+          <li><span class="check-icon"></span>Alt i Vækst-pakken</li>
+          <li><span class="check-icon"></span>Professionel hjemmeside</li>
+          <li><span class="check-icon"></span>Tekstforfatning & billeder</li>
+          <li><span class="check-icon"></span>Løbende vedligeholdelse</li>
         </ul>
-        <a href="#kontakt" class="pricing-btn pricing-btn-outline">Book gratis snak</a>
+        <button class="pricing-btn pricing-btn-outline" onclick="openContact()">Bestil tilbud</button>
       </div>
     </div>
   </div>
@@ -808,22 +1349,24 @@
 <section class="cta-section">
   <div class="cta-inner">
     <p class="section-label" style="text-align:center;">Tag det første skridt</p>
-    <h2 class="section-title">Klar til flere<br>opgaver?</h2>
-    <p class="section-sub" style="text-align:center;">Book en gratis og uforpligtende samtale. Vi ser på din situation og fortæller ærligt hvad der vil gøre den største forskel for dig.</p>
+    <h2 class="section-title">Klar til en fyldt<br>kalender?</h2>
+    <p class="section-sub" style="text-align:center;">Book en gratis og uforpligtende samtale. Vi fortæller ærligt hvad der vil gøre den største forskel for netop din forretning.</p>
     <div class="cta-actions">
       <a href="#kontakt" class="btn-primary">Book gratis snak</a>
+      <a href="#priser" class="btn-ghost">Se priser</a>
     </div>
+    <p class="cta-note">Ingen binding · Ingen skjulte gebyrer · Vi leverer opgaver — ikke besøgstallene</p>
   </div>
 </section>
 
 <!-- CONTACT -->
 <section class="section" id="kontakt">
   <div class="section-inner">
-    <p class="section-label">Kontakt</p>
-    <h2 class="section-title">Lad os tage<br>en snak.</h2>
     <div class="contact-grid">
       <div class="contact-info">
-        <p>Udfyld formularen, så kontakter vi dig inden for én hverdag for at aftale en gratis snak. Ingen forpligtelse — bare en ærlig samtale om hvad vi kan gøre for din forretning.</p>
+        <p class="section-label">Kontakt</p>
+        <h2 class="section-title">Lad os tage<br>en snak.</h2>
+        <p>Udfyld formularen, så kontakter vi dig inden for én hverdag. Det er en uforpligtende snak — ingen salg, bare en ærlig vurdering af hvad vi kan gøre for din forretning.</p>
         <div class="contact-items">
           <div class="contact-item">
             <div class="contact-item-icon">
@@ -833,43 +1376,53 @@
           </div>
           <div class="contact-item">
             <div class="contact-item-icon">
-              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 8 8l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 23.73 18 2 2 0 0 1 22 16.92z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 8 8l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 18z"/></svg>
             </div>
             <span class="contact-item-text">+45 XX XX XX XX</span>
           </div>
         </div>
+        <div class="contact-promise">
+          <p>🔒 Ingen binding · Vi vender tilbage inden for 24 timer · Du forpligter dig ikke til noget</p>
+        </div>
       </div>
-      <form id="contact-form" onsubmit="handleSubmit(event)">
-        <div class="form-row">
-          <div>
-            <label for="name">Dit navn</label>
-            <input type="text" id="name" name="name" placeholder="Klaus Nielsen" required />
+      <div class="form-card">
+        <h3>Book din gratis samtale</h3>
+        <form id="contact-form" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Dit navn *</label>
+              <input type="text" id="name" name="name" placeholder="Klaus Nielsen" />
+            </div>
+            <div class="form-group">
+              <label for="phone">Telefon *</label>
+              <input type="tel" id="phone" name="phone" placeholder="12 34 56 78" />
+            </div>
           </div>
-          <div>
-            <label for="phone">Telefon</label>
-            <input type="tel" id="phone" name="phone" placeholder="12 34 56 78" required />
+          <div class="form-group">
+            <label for="email">E-mail *</label>
+            <input type="email" id="email" name="email" placeholder="din@email.dk" />
           </div>
-        </div>
-        <div>
-          <label for="trade">Dit fag</label>
-          <select id="trade" name="trade" required>
-            <option value="" disabled selected>Vælg dit fag</option>
-            <option>Murer</option>
-            <option>VVS-mester</option>
-            <option>Elektriker</option>
-            <option>Maler</option>
-            <option>Tømrer</option>
-            <option>Snedker</option>
-            <option>Andet håndværk</option>
-          </select>
-        </div>
-        <div>
-          <label for="message">Hvad er din største udfordring? (valgfrit)</label>
-          <textarea id="message" name="message" placeholder="Fx: Jeg har svært ved at skaffe nye kunder, eller mine anmeldelser på Google er næsten tomme..."></textarea>
-        </div>
-        <button type="submit" class="form-submit" id="submit-btn">Send besked</button>
-        <p id="form-success" style="display:none; color: var(--rust); font-size: 0.9rem; margin-top: 0.5rem;">Tak! Vi vender tilbage inden for én hverdag.</p>
-      </form>
+          <div class="form-group">
+            <label for="trade">Dit fag *</label>
+            <select id="trade" name="trade">
+              <option value="" disabled selected>Vælg dit fag</option>
+              <option>Murer</option>
+              <option>VVS-mester</option>
+              <option>Elektriker</option>
+              <option>Maler</option>
+              <option>Tømrer</option>
+              <option>Snedker</option>
+              <option>Andet håndværk</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Din største udfordring (valgfrit)</label>
+            <textarea id="message" name="message" placeholder="Fx: Jeg har svært ved at skaffe nye kunder, eller mine Google-anmeldelser er næsten tomme..."></textarea>
+          </div>
+          <button type="submit" class="form-submit" id="submit-btn">Book gratis snak →</button>
+          <p class="form-disclaimer">Ved at sende accepterer du at vi kontakter dig. Ingen spam, ingen forpligtelse.</p>
+        </form>
+      </div>
     </div>
   </div>
 </section>
@@ -883,35 +1436,178 @@
   </div>
 </footer>
 
+<!-- SUCCESS MODAL -->
+<div class="modal-overlay" id="modal-success">
+  <div class="modal-box">
+    <button class="modal-x" onclick="closeModal('modal-success')">✕</button>
+    <div class="modal-icon success">🎉</div>
+    <h3>Tusinde tak!</h3>
+    <p>Tusinde tak for din interesse — vi kommer retur inden for 24 timer for at aftale et tidspunkt til en uforpligtende snak.</p>
+    <button class="modal-close rust-btn" onclick="closeModal('modal-success')">Perfekt, tak!</button>
+  </div>
+</div>
+
+<!-- ERROR MODAL -->
+<div class="modal-overlay" id="modal-error">
+  <div class="modal-box">
+    <button class="modal-x" onclick="closeModal('modal-error')">✕</button>
+    <div class="modal-icon error">⚠️</div>
+    <h3>Næsten der!</h3>
+    <p id="modal-error-msg">Udfyld venligst alle påkrævede felter, så vi kan tage kontakt til dig.</p>
+    <button class="modal-close" onclick="closeModal('modal-error')">Prøv igen</button>
+  </div>
+</div>
+
 <script>
-  function handleSubmit(e) {
-    e.preventDefault();
-    const btn = document.getElementById('submit-btn');
-    btn.textContent = 'Sender...';
-    btn.disabled = true;
-    setTimeout(() => {
-      document.getElementById('contact-form').reset();
-      btn.textContent = 'Send besked';
-      btn.disabled = false;
-      document.getElementById('form-success').style.display = 'block';
-    }, 1000);
+  /* ---- NAV SCROLL ---- */
+  window.addEventListener('scroll', () => {
+    document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 30);
+  });
+
+  /* ---- MOBILE MENU ---- */
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  function closeMobileMenu() {
+    mobileMenu.classList.remove('open');
+    hamburger.classList.remove('open');
+    document.body.style.overflow = '';
   }
 
+  /* ---- TYPEWRITER — writes each word once, holds 2s, then moves on. No loop blink. ---- */
+  const words = ['FLERE OPGAVER', 'MERE TID', 'PROFIT', 'GOD OMTALE'];
+  let wi = 0, ci = 0, deleting = false, blinkInterval = null;
+  const twEl = document.getElementById('typewriter');
+
+  function startBlink() {
+    if (blinkInterval) return;
+    blinkInterval = setInterval(() => {
+      twEl.style.borderColor = twEl.style.borderColor === 'transparent' ? 'var(--rust)' : 'transparent';
+    }, 500);
+  }
+  function stopBlink() {
+    clearInterval(blinkInterval);
+    blinkInterval = null;
+    twEl.style.borderColor = 'transparent';
+    twEl.style.borderRight = 'none';
+    twEl.style.paddingRight = '0';
+  }
+
+  function typeWord() {
+    const word = words[wi];
+    if (!deleting) {
+      ci++;
+      twEl.textContent = word.slice(0, ci);
+      if (ci === word.length) {
+        // Word fully typed — hold 2s then delete (unless last iteration: just stop)
+        deleting = true;
+        setTimeout(typeWord, 2000);
+        return;
+      }
+    } else {
+      ci--;
+      twEl.textContent = word.slice(0, ci);
+      if (ci === 0) {
+        deleting = false;
+        wi = (wi + 1) % words.length;
+      }
+    }
+    setTimeout(typeWord, deleting ? 45 : 80);
+  }
+
+  // Start after short delay
+  setTimeout(() => {
+    startBlink();
+    typeWord();
+  }, 700);
+
+  /* ---- REVEAL ON SCROLL ---- */
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
+    entries.forEach((e, i) => {
       if (e.isIntersecting) {
-        e.target.style.opacity = '1';
-        e.target.style.transform = 'translateY(0)';
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
       }
     });
   }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  document.querySelectorAll('.problem-card, .service-card, .testimonial-card, .pricing-card, .step').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(16px)';
-    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-    observer.observe(el);
+  /* ---- PRIDE PHOTO FADE IN ---- */
+  const photoEl = document.getElementById('pride-photo');
+  const photoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        setTimeout(() => photoEl.classList.add('visible'), 200);
+        photoObserver.unobserve(photoEl);
+      }
+    });
+  }, { threshold: 0.3 });
+  photoObserver.observe(photoEl);
+
+  /* ---- MODALS ---- */
+  function openModal(id) {
+    document.getElementById(id).classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(id) {
+    document.getElementById(id).classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  document.querySelectorAll('.modal-overlay').forEach(m => {
+    m.addEventListener('click', (e) => { if (e.target === m) closeModal(m.id); });
   });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') document.querySelectorAll('.modal-overlay.active').forEach(m => closeModal(m.id));
+  });
+
+  /* ---- FORM VALIDATION & SUBMIT ---- */
+  document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name  = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const trade = document.getElementById('trade').value;
+    const msgEl = document.getElementById('modal-error-msg');
+
+    if (!name) {
+      msgEl.textContent = 'Indtast venligst dit navn, så vi ved hvem vi taler med.';
+      openModal('modal-error'); return;
+    }
+    if (!phone && !email) {
+      msgEl.textContent = 'Vi har brug for enten dit telefonnummer eller din e-mail for at kunne kontakte dig.';
+      openModal('modal-error'); return;
+    }
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      msgEl.textContent = 'E-mailadressen ser ikke korrekt ud — tjek venligst og prøv igen.';
+      openModal('modal-error'); return;
+    }
+    if (!trade) {
+      msgEl.textContent = 'Vælg venligst dit fag — det hjælper os med at forberede samtalen.';
+      openModal('modal-error'); return;
+    }
+
+    const btn = document.getElementById('submit-btn');
+    btn.textContent = 'Sender...';
+    btn.disabled = true;
+
+    setTimeout(() => {
+      document.getElementById('contact-form').reset();
+      btn.textContent = 'Book gratis snak →';
+      btn.disabled = false;
+      openModal('modal-success');
+    }, 900);
+  });
+
+  /* ---- HELPER for pricing buttons ---- */
+  function openContact() {
+    document.getElementById('kontakt').scrollIntoView({ behavior: 'smooth' });
+  }
 </script>
 </body>
 </html>
