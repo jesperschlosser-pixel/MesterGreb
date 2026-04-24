@@ -1,0 +1,1372 @@
+
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ═══ SEO: Tilpasset VVS + Trekantsområdet ═══ -->
+  <title>Flere Snedkeropgaver i Trekantsområdet | MesterGreb</title>
+  <meta name="description" content="MesterGreb hjælper snedkere i Vejle, Kolding og Fredericia med at skaffe flere opgaver, automatisere tilbudsopfølgning og bygge et stærkt Google-omdømme. Ingen binding." />
+  <meta name="keywords" content="Snedker marketing Vejle, Snedker opgaver Kolding, Snedker Fredericia, Snedker Trekantsområdet, digital markedsføring Snedker" />
+  <link rel="canonical" href="https://mestergreb.dk/snedker" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Flere Snedkeropgaver i Trekantsområdet | MesterGreb" />
+  <meta property="og:description" content="Vi hjælper snedkere i Vejle, Kolding og Fredericia med at fylde kalenderen med konkrete opgaver." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://mestergreb.dk/snedker" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sand: #F5F0E8;
+      --sand-dark: #EDE6D6;
+      --sand-mid: #E8E0CC;
+      --oak: #8B6B3D;
+      --oak-dark: #6B4F28;
+      --iron: #2C2C28;
+      --iron-mid: #4A4A44;
+      --iron-light: #7A7A72;
+      --rust: #C0522B;
+      --rust-light: #D4694A;
+      --rust-pale: rgba(192,82,43,0.08);
+      --white: #FEFCF8;
+      --radius: 8px;
+      --radius-lg: 14px;
+      --shadow-sm: 0 1px 3px rgba(44,44,40,0.08), 0 4px 12px rgba(44,44,40,0.05);
+      --shadow-md: 0 4px 16px rgba(44,44,40,0.1), 0 1px 4px rgba(44,44,40,0.06);
+      --shadow-lg: 0 12px 40px rgba(44,44,40,0.14), 0 2px 8px rgba(44,44,40,0.06);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--iron);
+      line-height: 1.65;
+      font-size: 16px;
+      overflow-x: hidden;
+    }
+
+    /* ===================== NAV ===================== */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 200;
+      background: rgba(254,252,248,0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(44,44,40,0.07);
+      padding: 0 2.5rem;
+      height: 70px;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: var(--shadow-sm); }
+    .nav-logo {
+      font-family: 'Fraunces', serif;
+      font-weight: 700; font-size: 1.45rem;
+      color: var(--iron); text-decoration: none;
+      letter-spacing: -0.025em;
+    }
+    .nav-logo span { color: var(--rust); }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links a {
+      text-decoration: none; color: var(--iron-mid);
+      font-size: 0.92rem; font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--iron); }
+    .nav-cta {
+      background: var(--rust) !important;
+      color: var(--white) !important;
+      padding: 0.6rem 1.4rem;
+      border-radius: var(--radius);
+      font-size: 0.9rem !important;
+      transition: background 0.2s, transform 0.15s !important;
+    }
+    .nav-cta:hover { background: var(--rust-light) !important; transform: translateY(-1px); }
+
+    /* Dropdown til håndværkersider */
+    .nav-dropdown { position: relative; }
+    .nav-dropdown-btn {
+      display: flex; align-items: center; gap: 0.3rem;
+      text-decoration: none; color: var(--iron-mid);
+      font-size: 0.92rem; font-weight: 500;
+      cursor: pointer; background: none; border: none;
+      font-family: 'DM Sans', sans-serif;
+      transition: color 0.2s;
+    }
+    .nav-dropdown-btn:hover { color: var(--iron); }
+    .nav-dropdown-btn svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform 0.2s; }
+    .nav-dropdown:hover .nav-dropdown-btn svg { transform: rotate(180deg); }
+    .nav-dropdown-menu {
+      position: absolute; top: 100%; left: 50%;
+      padding-top: 10px; /* bridge the gap so hover doesn't break */
+      transform: translateX(-50%);
+      min-width: 210px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.2s;
+    }
+    .nav-dropdown-menu-inner {
+      background: var(--white);
+      border: 1px solid rgba(44,44,40,0.1);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      padding: 0.5rem;
+    }
+    .nav-dropdown:hover .nav-dropdown-menu {
+      opacity: 1; pointer-events: all;
+    }
+    .nav-dropdown-menu a {
+      display: flex; align-items: center; gap: 0.7rem;
+      padding: 0.6rem 0.9rem;
+      text-decoration: none; color: var(--iron-mid);
+      font-size: 0.88rem; font-weight: 500;
+      border-radius: var(--radius);
+      transition: background 0.15s, color 0.15s;
+    }
+    .nav-dropdown-menu a:hover { background: var(--sand); color: var(--iron); }
+    .nav-dropdown-menu a.active { color: var(--rust); background: var(--rust-pale); }
+    .nav-dropdown-menu a svg { width: 15px; height: 15px; stroke: var(--iron-light); fill: none; stroke-width: 1.8; flex-shrink: 0; }
+    .nav-dropdown-menu a:hover svg { stroke: var(--rust); }
+    .nav-dropdown-menu a.active svg { stroke: var(--rust); }
+    .nav-dropdown-divider { height: 1px; background: rgba(44,44,40,0.07); margin: 0.3rem 0.5rem; }
+
+    /* ===================== HAMBURGER ===================== */
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 4px; background: none; border: none;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--iron); border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none; position: fixed; top: 70px; left: 0; right: 0; bottom: 0;
+      z-index: 150; background: var(--iron);
+      flex-direction: column; padding: 2rem 2rem 3rem; gap: 0;
+      transform: translateX(100%);
+      visibility: hidden;
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.35s;
+    }
+    .mobile-menu.open { transform: translateX(0); visibility: visible; }
+    .mobile-menu a {
+      display: flex; align-items: center; justify-content: space-between;
+      text-decoration: none; color: rgba(255,255,255,0.75);
+      font-family: 'Fraunces', serif; font-size: 1.6rem; font-weight: 600;
+      padding: 1.1rem 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+      letter-spacing: -0.02em; transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--white); }
+    .mobile-menu a::after { content: '→'; font-family: 'DM Sans', sans-serif; font-size: 1rem; opacity: 0.4; }
+    .mobile-submenu-label {
+      font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(255,255,255,0.35); padding: 1.2rem 0 0.4rem;
+      font-family: 'DM Sans', sans-serif; font-weight: 500;
+    }
+    .mobile-menu .mobile-craft-link {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem; font-weight: 500;
+      padding: 0.65rem 0;
+    }
+    .mobile-menu .mobile-craft-link::after { font-size: 0.8rem; }
+    .mobile-menu-cta { margin-top: auto; padding-top: 2rem; }
+    .mobile-menu-cta a {
+      display: block !important; text-align: center;
+      background: var(--rust) !important; color: var(--white) !important;
+      border-radius: var(--radius); padding: 1rem 2rem !important;
+      font-family: 'DM Sans', sans-serif !important;
+      font-size: 1rem !important; font-weight: 500 !important;
+      border: none !important; justify-content: center !important;
+    }
+    .mobile-menu-cta a::after { display: none !important; }
+    .mobile-menu-logo {
+      font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 700;
+      color: rgba(255,255,255,0.3); margin-top: 1.5rem; text-align: center;
+    }
+    .mobile-menu-logo span { color: var(--rust-light); }
+
+    /* ===================== HERO ===================== */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 120px 2.5rem 80px;
+      background: var(--white);
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -120px; right: -80px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(192,82,43,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: -100px; left: -60px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(139,107,61,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 1120px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: center;
+      position: relative; z-index: 1;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.78rem; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--rust); margin-bottom: 1.6rem;
+      background: var(--rust-pale);
+      padding: 0.4rem 0.9rem; border-radius: 100px;
+      border: 1px solid rgba(192,82,43,0.15);
+    }
+    .hero-eyebrow::before { content: '●'; font-size: 0.5rem; }
+    .hero h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2.6rem, 5vw, 3.9rem);
+      font-weight: 700; line-height: 1.06;
+      letter-spacing: -0.035em; color: var(--iron);
+      margin-bottom: 1.6rem;
+    }
+    .hero h1 em {
+      font-style: italic; color: var(--rust);
+    }
+    .hero-city-swap {
+      color: var(--rust);
+      font-weight: 700;
+      font-style: normal;
+      display: inline-block;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .hero-city-swap.fade-out {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    .hero-city-swap.fade-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .hero-sub {
+      font-size: 1.1rem; color: var(--iron-mid);
+      line-height: 1.75; max-width: 460px;
+      margin-bottom: 1.6rem; font-weight: 300;
+    }
+    /* Byer badge-liste */
+    .hero-cities {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      margin-bottom: 2.2rem;
+    }
+    .city-badge {
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      font-size: 0.78rem; font-weight: 500;
+      color: var(--oak); background: rgba(139,107,61,0.1);
+      border: 1px solid rgba(139,107,61,0.2);
+      padding: 0.3rem 0.75rem; border-radius: 100px;
+    }
+    .city-badge::before { content: '📍'; font-size: 0.65rem; }
+
+    .hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; margin-bottom: 2rem; }
+
+    .btn-primary {
+      background: var(--rust); color: var(--white);
+      padding: 0.9rem 2rem; border-radius: var(--radius);
+      text-decoration: none; font-weight: 500; font-size: 0.95rem;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      display: inline-block; box-shadow: 0 4px 14px rgba(192,82,43,0.3);
+    }
+    .btn-primary:hover { background: var(--rust-light); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(192,82,43,0.35); }
+    .btn-ghost {
+      color: var(--iron-mid); text-decoration: none; font-weight: 500;
+      font-size: 0.92rem; display: flex; align-items: center; gap: 0.5rem;
+      padding: 0.9rem 1.4rem;
+      border: 1.5px solid rgba(44,44,40,0.15);
+      border-radius: var(--radius); transition: all 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--iron); color: var(--iron); background: rgba(44,44,40,0.03); }
+
+    .hero-guarantee {
+      display: flex; align-items: center; gap: 0.6rem;
+      font-size: 0.82rem; color: var(--iron-light);
+    }
+    .hero-guarantee svg { width: 16px; height: 16px; stroke: var(--oak); fill: none; stroke-width: 2; flex-shrink: 0; }
+
+    /* Hero card */
+    .hero-visual { position: relative; }
+    .hero-card {
+      background: var(--sand); border-radius: var(--radius-lg);
+      padding: 2rem; border: 1px solid rgba(44,44,40,0.09);
+      box-shadow: var(--shadow-lg);
+    }
+    .hero-card-badge {
+      position: absolute; top: -14px; right: 20px;
+      background: var(--rust); color: var(--white);
+      font-size: 0.72rem; font-weight: 600;
+      padding: 0.3rem 0.8rem; border-radius: 100px;
+      letter-spacing: 0.05em; text-transform: uppercase;
+    }
+    .hero-card-header {
+      display: flex; align-items: center; gap: 0.9rem;
+      margin-bottom: 1.6rem; padding-bottom: 1.2rem;
+      border-bottom: 1px solid rgba(44,44,40,0.08);
+    }
+    .hero-avatar {
+      width: 46px; height: 46px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--oak), var(--oak-dark));
+      display: flex; align-items: center; justify-content: center;
+      color: var(--white); font-weight: 600; font-size: 0.88rem;
+      box-shadow: 0 2px 8px rgba(107,79,40,0.3);
+    }
+    .hero-card-name { font-weight: 600; font-size: 0.95rem; }
+    .hero-card-trade { font-size: 0.8rem; color: var(--iron-light); }
+    .hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.75rem; }
+    .hero-stat {
+      background: var(--white); border-radius: var(--radius);
+      padding: 1rem; border: 1px solid rgba(44,44,40,0.06);
+    }
+    .hero-stat-num {
+      font-family: 'Fraunces', serif;
+      font-size: 1.9rem; font-weight: 700;
+      color: var(--iron); line-height: 1; margin-bottom: 0.25rem;
+    }
+    .hero-stat-num.up { color: var(--rust); }
+    .hero-stat-label { font-size: 0.76rem; color: var(--iron-light); line-height: 1.3; }
+    .hero-review {
+      background: var(--white); border-radius: var(--radius);
+      padding: 1rem; border: 1px solid rgba(44,44,40,0.06);
+    }
+    .hero-stars { color: #E8A020; font-size: 0.85rem; margin-bottom: 0.4rem; letter-spacing: 1px; }
+    .hero-review-text { font-size: 0.82rem; color: var(--iron-mid); font-style: italic; line-height: 1.5; }
+    .hero-review-author { font-size: 0.74rem; color: var(--iron-light); margin-top: 0.4rem; }
+
+    /* ===================== SECTION BASE ===================== */
+    .section { padding: 6rem 2.5rem; position: relative; overflow: hidden; }
+    .section-inner { max-width: 1120px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.76rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--rust);
+      font-weight: 500; margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 4vw, 2.9rem);
+      font-weight: 700; line-height: 1.08;
+      letter-spacing: -0.03em; color: var(--iron);
+      margin-bottom: 1.1rem;
+    }
+    .section-sub {
+      font-size: 1.05rem; color: var(--iron-mid);
+      max-width: 520px; line-height: 1.7; font-weight: 300;
+    }
+    .section-header { margin-bottom: 3.5rem; }
+
+    /* ===================== VVS PAIN POINTS ===================== */
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+    .pain-card {
+      background: var(--sand); border-radius: var(--radius-lg);
+      padding: 1.8rem; border: 1px solid rgba(44,44,40,0.07);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .pain-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    .pain-icon {
+      width: 42px; height: 42px;
+      background: rgba(192,82,43,0.1); border-radius: var(--radius);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.1rem;
+    }
+    .pain-icon svg { width: 20px; height: 20px; stroke: var(--rust); fill: none; stroke-width: 1.8; }
+    .pain-card h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.05rem; font-weight: 600;
+      color: var(--iron); margin-bottom: 0.5rem;
+    }
+    .pain-card p { font-size: 0.88rem; color: var(--iron-mid); line-height: 1.65; }
+
+    /* ===================== SERVICES (mørk) ===================== */
+    .services-bg {
+      background: var(--iron);
+      position: relative;
+      z-index: 1;
+      isolation: isolate;
+    }
+    .services-bg .section-title { color: var(--white); }
+    .services-bg .section-label { color: var(--rust-light); }
+    .services-bg .section-sub { color: rgba(255,255,255,0.55); }
+    .services-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;
+    }
+    .service-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: var(--radius-lg); padding: 2rem;
+      transition: background 0.25s, border-color 0.25s, transform 0.25s;
+      position: relative; overflow: hidden;
+    }
+    .service-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--rust), var(--rust-light));
+      opacity: 0; transition: opacity 0.25s;
+    }
+    .service-card:hover { background: rgba(255,255,255,0.07); transform: translateY(-3px); }
+    .service-card:hover::before { opacity: 1; }
+    .service-icon {
+      width: 46px; height: 46px;
+      background: rgba(192,82,43,0.18); border-radius: var(--radius);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.3rem;
+    }
+    .service-icon svg { width: 22px; height: 22px; stroke: var(--rust-light); fill: none; stroke-width: 1.8; }
+    .service-card h3 {
+      font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 600;
+      color: var(--white); margin-bottom: 0.5rem;
+    }
+    .service-card p { font-size: 0.87rem; color: rgba(255,255,255,0.55); line-height: 1.65; }
+    .service-result {
+      margin-top: 1.2rem; display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.78rem; color: var(--rust-light); font-weight: 500;
+    }
+    .service-result::before { content: '→'; }
+
+    /* ===================== CITIES SECTION ===================== */
+    .cities-bg { background: var(--sand); position: relative; overflow: hidden; }
+    .cities-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem; margin-top: 2.5rem;
+    }
+    .city-card {
+      background: var(--white); border-radius: var(--radius-lg);
+      padding: 1.6rem 1.4rem;
+      border: 1px solid rgba(44,44,40,0.07);
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+    .city-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: rgba(192,82,43,0.2); }
+    .city-name {
+      font-family: 'Fraunces', serif;
+      font-size: 1.15rem; font-weight: 700;
+      color: var(--iron); margin-bottom: 0.3rem;
+    }
+    .city-desc { font-size: 0.82rem; color: var(--iron-light); line-height: 1.5; }
+    .city-tag {
+      display: inline-block; margin-top: 0.8rem;
+      font-size: 0.72rem; font-weight: 500;
+      color: var(--rust); background: var(--rust-pale);
+      border: 1px solid rgba(192,82,43,0.15);
+      padding: 0.2rem 0.6rem; border-radius: 100px;
+    }
+
+    /* ===================== STEPS ===================== */
+    .steps-track {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem; margin-top: 3.5rem; position: relative;
+    }
+    .steps-track::before {
+      content: ''; position: absolute; top: 18px; left: 60px; right: 60px;
+      height: 1px;
+      background: repeating-linear-gradient(90deg, rgba(139,107,61,0.25) 0, rgba(139,107,61,0.25) 5px, transparent 5px, transparent 12px);
+      z-index: 0;
+    }
+    .step { position: relative; z-index: 1; }
+    .step-dot {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--rust); color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 600; font-size: 0.82rem; margin-bottom: 1.3rem;
+      box-shadow: 0 0 0 5px rgba(192,82,43,0.1);
+    }
+    .step h3 {
+      font-family: 'Fraunces', serif; font-size: 1.05rem; font-weight: 600;
+      color: var(--iron); margin-bottom: 0.45rem;
+    }
+    .step p { font-size: 0.87rem; color: var(--iron-mid); line-height: 1.65; }
+
+    /* ===================== TESTIMONIALS ===================== */
+    .testimonials-bg { background: var(--sand); position: relative; overflow: hidden; }
+    .testimonials-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;
+    }
+    .testimonial-card {
+      background: var(--white); border-radius: var(--radius-lg);
+      padding: 2rem; border: 1px solid rgba(44,44,40,0.07);
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.25s, box-shadow 0.25s;
+      display: flex; flex-direction: column;
+    }
+    .testimonial-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .testimonial-stars { color: #E8A020; font-size: 0.9rem; margin-bottom: 1.1rem; letter-spacing: 1px; }
+    .testimonial-text {
+      font-family: 'Fraunces', serif; font-size: 0.98rem; font-style: italic;
+      color: var(--iron); line-height: 1.7; margin-bottom: 1.5rem; flex: 1;
+    }
+    .testimonial-author {
+      display: flex; align-items: center; gap: 0.8rem;
+      padding-top: 1.2rem; border-top: 1px solid rgba(44,44,40,0.07);
+    }
+    .testimonial-av {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--oak); display: flex; align-items: center; justify-content: center;
+      color: var(--white); font-weight: 600; font-size: 0.78rem; flex-shrink: 0;
+    }
+    .testimonial-av.v2 { background: var(--iron-mid); }
+    .testimonial-av.v3 { background: var(--rust); }
+    .testimonial-name { font-weight: 600; font-size: 0.88rem; }
+    .testimonial-trade { font-size: 0.78rem; color: var(--iron-light); margin-top: 0.1rem; }
+
+    /* ===================== CTA BANNER ===================== */
+    .cta-banner {
+      background: linear-gradient(135deg, var(--rust) 0%, var(--rust-light) 100%);
+      padding: 5rem 2.5rem; text-align: center; position: relative;
+      overflow: clip;
+    }
+    .cta-banner::before {
+      content: ''; position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .cta-banner-inner { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
+    .cta-banner h2 {
+      font-family: 'Fraunces', serif; font-size: clamp(1.9rem, 4vw, 2.8rem);
+      font-weight: 700; color: var(--white); line-height: 1.1;
+      letter-spacing: -0.03em; margin-bottom: 1rem;
+    }
+    .cta-banner p { font-size: 1.05rem; color: rgba(255,255,255,0.8); line-height: 1.7; margin-bottom: 2rem; }
+    .btn-white {
+      background: var(--white); color: var(--rust);
+      padding: 1rem 2.2rem; border-radius: var(--radius);
+      text-decoration: none; font-weight: 600; font-size: 0.95rem;
+      display: inline-block; transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(0,0,0,0.2); }
+
+    /* ===================== CONTACT ===================== */
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
+    }
+    .contact-info p { font-size: 1rem; color: var(--iron-mid); line-height: 1.75; margin-bottom: 1.5rem; }
+    .contact-items { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.5rem; }
+    .contact-item { display: flex; align-items: center; gap: 0.75rem; }
+    .contact-item-icon {
+      width: 36px; height: 36px; background: var(--sand); border-radius: var(--radius);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .contact-item-icon svg { width: 16px; height: 16px; stroke: var(--rust); fill: none; stroke-width: 1.8; }
+    .contact-item-text { font-size: 0.92rem; color: var(--iron-mid); }
+    .contact-promise {
+      background: var(--sand); border-radius: var(--radius);
+      padding: 1rem 1.2rem;
+      font-size: 0.82rem; color: var(--iron-light); line-height: 1.6;
+    }
+    .form-card {
+      background: var(--white); border-radius: var(--radius-lg);
+      padding: 2.4rem; border: 1px solid rgba(44,44,40,0.09);
+      box-shadow: var(--shadow-lg);
+    }
+    .form-card h3 {
+      font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 700;
+      color: var(--iron); margin-bottom: 1.8rem; letter-spacing: -0.02em;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
+    .form-group label { font-size: 0.82rem; font-weight: 500; color: var(--iron-mid); }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 0.75rem 1rem; border: 1.5px solid rgba(44,44,40,0.15);
+      border-radius: var(--radius); font-family: 'DM Sans', sans-serif;
+      font-size: 0.92rem; color: var(--iron); background: var(--white);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none; border-color: var(--rust);
+      box-shadow: 0 0 0 3px rgba(192,82,43,0.1);
+    }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .form-submit {
+      width: 100%; background: var(--rust); color: var(--white);
+      border: none; cursor: pointer; padding: 1rem;
+      border-radius: var(--radius); font-family: 'DM Sans', sans-serif;
+      font-size: 1rem; font-weight: 500;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 4px 14px rgba(192,82,43,0.25);
+    }
+    .form-submit:hover { background: var(--rust-light); transform: translateY(-1px); }
+    .form-submit:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+    .form-disclaimer { font-size: 0.76rem; color: var(--iron-light); text-align: center; margin-top: 0.75rem; }
+
+    /* ===================== FOOTER ===================== */
+    footer {
+      background: var(--iron);
+      color: rgba(255,255,255,0.45);
+      padding: 3.5rem 2.5rem;
+      position: relative;
+      z-index: 0;
+    }
+    .footer-inner {
+      max-width: 1120px; margin: 0 auto;
+    }
+    .footer-top {
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 3rem; align-items: start;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 2rem;
+    }
+    .footer-logo {
+      font-family: 'Fraunces', serif; font-size: 1.25rem; font-weight: 700;
+      color: var(--white); text-decoration: none; display: block; margin-bottom: 0.5rem;
+    }
+    .footer-logo span { color: var(--rust-light); }
+    .footer-tagline { font-size: 0.84rem; color: rgba(255,255,255,0.4); }
+
+    /* Footer nav med håndværker-links */
+    .footer-nav {
+      display: flex; gap: 4rem;
+    }
+    .footer-nav-col h4 {
+      font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(255,255,255,0.35); font-weight: 500; margin-bottom: 0.9rem;
+    }
+    .footer-nav-col a {
+      display: block; text-decoration: none;
+      color: rgba(255,255,255,0.55); font-size: 0.86rem;
+      padding: 0.25rem 0; transition: color 0.15s;
+    }
+    .footer-nav-col a:hover { color: var(--white); }
+    .footer-nav-col a.active { color: var(--rust-light); }
+
+    .footer-bottom {
+      display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 0.75rem;
+    }
+    .footer-text { font-size: 0.82rem; }
+
+    /* ===================== MODAL ===================== */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 999;
+      background: rgba(44,44,40,0.65); backdrop-filter: blur(6px);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s; padding: 1rem;
+    }
+    .modal-overlay.active { opacity: 1; pointer-events: all; }
+    .modal-box {
+      background: var(--white); border-radius: var(--radius-lg);
+      padding: 2.8rem 2.4rem; max-width: 440px; width: 100%;
+      text-align: center; box-shadow: var(--shadow-lg);
+      transform: scale(0.92) translateY(10px);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+    }
+    .modal-overlay.active .modal-box { transform: scale(1) translateY(0); }
+    .modal-icon {
+      width: 64px; height: 64px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.4rem; font-size: 1.8rem;
+    }
+    .modal-icon.success { background: rgba(192,82,43,0.1); }
+    .modal-icon.error { background: rgba(192,82,43,0.08); }
+    .modal-box h3 {
+      font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 700;
+      color: var(--iron); margin-bottom: 0.7rem; letter-spacing: -0.02em;
+    }
+    .modal-box p { font-size: 0.93rem; color: var(--iron-mid); line-height: 1.7; margin-bottom: 1.8rem; }
+    .modal-close {
+      background: var(--iron); color: var(--white);
+      border: none; cursor: pointer; padding: 0.8rem 2rem;
+      border-radius: var(--radius); font-family: 'DM Sans', sans-serif;
+      font-size: 0.92rem; font-weight: 500; transition: background 0.2s;
+    }
+    .modal-close.rust-btn { background: var(--rust); }
+    .modal-close.rust-btn:hover { background: var(--rust-light); }
+    .modal-close:hover { background: var(--iron-mid); }
+    .modal-x {
+      position: absolute; top: 1rem; right: 1.2rem;
+      background: none; border: none; cursor: pointer;
+      font-size: 1.2rem; color: var(--iron-light); line-height: 1; padding: 0.3rem;
+    }
+    .modal-x:hover { color: var(--iron); }
+
+    /* ===================== ANIMATIONS ===================== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-eyebrow { animation: fadeUp 0.6s ease 0.1s both; }
+    .hero h1      { animation: fadeUp 0.6s ease 0.2s both; }
+    .hero-sub     { animation: fadeUp 0.6s ease 0.32s both; }
+    .hero-cities  { animation: fadeUp 0.6s ease 0.42s both; }
+    .hero-actions { animation: fadeUp 0.6s ease 0.5s both; }
+    .hero-guarantee { animation: fadeUp 0.6s ease 0.58s both; }
+    .hero-visual  { animation: fadeUp 0.7s ease 0.3s both; }
+
+    .reveal {
+      opacity: 0; transform: translateY(18px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+      position: relative;
+      z-index: 0;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ===================== RESPONSIVE ===================== */
+    @media (max-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-nav { gap: 2.5rem; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .mobile-menu { display: flex; visibility: hidden; }
+      .hero { padding: 110px 1.5rem 60px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .hero-visual { order: 1; }
+      .hero h1 { font-size: 2.2rem; }
+      .section { padding: 4rem 1.5rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      .steps-track { grid-template-columns: 1fr 1fr; }
+      .steps-track::before { display: none; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-nav { flex-wrap: wrap; gap: 2rem; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+      .cities-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .steps-track { grid-template-columns: 1fr; }
+      .cities-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="/" class="nav-logo">Mester<span>Greb</span></a>
+  <div class="nav-links">
+    <a href="/#ydelser">Ydelser</a>
+    <a href="/#hvordan">Sådan virker det</a>
+    <a href="/#priser">Priser</a>
+
+    <!-- Dropdown: Håndværkersider -->
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">
+        Håndværkere
+        <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="nav-dropdown-menu">
+        <div class="nav-dropdown-menu-inner">
+          <a href="/vvs-mester">
+            <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            VVS
+          </a>
+          <a href="/elektriker">
+            <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            Elektriker
+          </a>
+          <a href="/murer">
+            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M8 3v18M16 3v18M2 12h20"/></svg>
+            Murer
+          </a>
+          <a href="/maler">
+            <svg viewBox="0 0 24 24"><path d="M18 3a3 3 0 0 1 0 6h-1v1a3 3 0 0 1-6 0V9H3a1 1 0 0 1 0-2h8V6a3 3 0 0 1 3-3h4z"/><path d="M6 18a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>
+            Maler
+          </a>
+          <a href="/tomrer">
+            <svg viewBox="0 0 24 24"><path d="M15 12l-8.5 8.5a2.12 2.12 0 0 1-3-3L12 9"/><path d="M17.64 15L22 10.64"/><path d="M20.91 11.7l-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h2.47l2.26 1.91"/></svg>
+            Tømrer
+          </a>
+          <a href="/snedker" class="active">
+            <svg viewBox="0 0 24 24"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+            Snedker
+          </a>
+        </div>
+      </div>
+
+    <a href="#kontakt" class="nav-cta">Book gratis snak</a>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="/#ydelser" onclick="closeMobileMenu()">Ydelser</a>
+  <a href="/#hvordan" onclick="closeMobileMenu()">Sådan virker det</a>
+  <a href="/#priser" onclick="closeMobileMenu()">Priser</a>
+  <div class="mobile-submenu-label">Håndværkersider</div>
+  <a href="/vvs-mester" class="mobile-craft-link" onclick="closeMobileMenu()">VVS-mester</a>
+  <a href="/elektriker" class="mobile-craft-link" onclick="closeMobileMenu()">Elektriker</a>
+  <a href="/murer" class="mobile-craft-link" onclick="closeMobileMenu()">Murer</a>
+  <a href="/maler" class="mobile-craft-link" onclick="closeMobileMenu()">Maler</a>
+  <a href="/tomrer" class="mobile-craft-link" onclick="closeMobileMenu()">Tømrer</a>
+  <a href="/snedker" class="mobile-craft-link" onclick="closeMobileMenu()">Snedker</a>
+  <div class="mobile-menu-cta">
+    <a href="#kontakt" onclick="closeMobileMenu()">Book gratis snak →</a>
+  </div>
+  <div class="mobile-menu-logo">Mester<span>Greb</span></div>
+</div>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <p class="hero-eyebrow">Kun for snedkere</p>
+      <h1>
+        Flere Snedkeropgaver<br>
+        i <span class="hero-city-swap" id="citySwap">VEJLE</span>
+      </h1>
+      <p class="hero-sub">Vi sætter de digitale systemer op, der fylder din kalender med kunder fra Vejle, Kolding og hele Trekantsområdet. Ingen binding, ingen teknisk viden nødvendig.</p>
+
+      <!-- Byer — SEO + visuelt signal -->
+      <div class="hero-cities">
+        <span class="city-badge">Vejle</span>
+        <span class="city-badge">Kolding</span>
+        <span class="city-badge">Fredericia</span>
+        <span class="city-badge">Give</span>
+        <span class="city-badge">Billund</span>
+        <span class="city-badge">Jelling</span>
+        <span class="city-badge">Børkop</span>
+      </div>
+
+      <div class="hero-actions">
+        <a href="#kontakt" class="btn-primary">Book en gratis snak</a>
+        <a href="#ydelser" class="btn-ghost">Se hvad vi tilbyder</a>
+      </div>
+      <div class="hero-guarantee">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>Ingen binding — ingen skjulte gebyrer — faktiske opgaver, ikke bare besøg</span>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card" style="position:relative;">
+        <div class="hero-card-badge">Live dashboard</div>
+        <div class="hero-card-header">
+          <div class="hero-avatar">OO</div>
+          <div>
+            <div class="hero-card-name">Oliver Olsen</div>
+            <div class="hero-card-trade">Snedker, Kolding · Aktiv kunde</div>
+          </div>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-num up">+8</div>
+            <div class="hero-stat-label">nye snedkeropgaver seneste måned</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">5.0★</div>
+            <div class="hero-stat-label">Google-bedømmelse</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num up">79%</div>
+            <div class="hero-stat-label">tilbud accepteret</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">0t</div>
+            <div class="hero-stat-label">brugt på opfølgning</div>
+          </div>
+        </div>
+        <div class="hero-review">
+          <div class="hero-stars">★★★★★</div>
+          <div class="hero-review-text">"Ringedet fra Kolding — utroligt flot snedkerarbejde. Præcist og med øje for detaljen!"</div>
+          <div class="hero-review-author">— Google-anmeldelse, indsamlet automatisk</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ PAIN POINTS ═══════════════ -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-header">
+      <p class="section-label">Kender du det?</p>
+      <h2 class="section-title">De udfordringer de fleste<br>snedkere kæmper med</h2>
+      <p class="section-sub">Du er god til dit fag. Men at skaffe nye kunder og holde styr på den digitale side — det er en anden snak.</p>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-card reveal">
+        <div class="pain-icon">
+          <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <h3>Svær at finde på Google</h3>
+        <p>Lokale kunder søger "Snedker Vejle" eller "Snedker Kolding" — men de finder ikke dig. Du ender som nr. 8, og det giver nul opkald.</p>
+      </div>
+      <div class="pain-card reveal">
+        <div class="pain-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3>Tilbud der ikke høres fra igen</h3>
+        <p>Du sender et tilbud og venter. Ingen svar. Kunden valgte en anden — ikke fordi du var dårligst, men fordi du ikke fulgte op i tide.</p>
+      </div>
+      <div class="pain-card reveal">
+        <div class="pain-icon">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <h3>For få Google-anmeldelser</h3>
+        <p>Dine kunder er tilfredse, men de skriver sjældent en anmeldelse. Konkurrenten med 60 anmeldelser vinder, selvom du er bedre.</p>
+      </div>
+      <div class="pain-card reveal">
+        <div class="pain-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <h3>En hjemmeside der ikke virker</h3>
+        <p>Har du en hjemmeside der ser gammel ud, er svær at finde frem til, eller ikke giver folk grund til at ringe? Du mister kunder hver dag.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ SERVICES ═══════════════ -->
+<section class="section services-bg" id="ydelser">
+  <div class="section-inner">
+    <div class="section-header">
+      <p class="section-label">Løsninger</p>
+      <h2 class="section-title">Hvad vi gør for dig<br>som snedker</h2>
+      <p class="section-sub">Konkrete systemer der giver konkrete snedkeropgaver. Ikke tomme løfter om mere trafik.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <h3>Lokal synlighed i Trekantsområdet</h3>
+        <p>Vi optimerer din Google Business-profil og hjemmeside, så du dukker op når folk søger "Snedker Vejle", "Snedker Kolding" eller "Snedker Fredericia".</p>
+        <div class="service-result">Synlig for lokale søgninger fra dag 1</div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 8 8l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <h3>Automatisk tilbudsopfølgning</h3>
+        <p>Systemet sender automatisk SMS og mail efter dit tilbud. Kunden får en påmindelse — og du vinder opgaven uden at løfte en finger.</p>
+        <div class="service-result">Op til 40% flere accepterede tilbud</div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <h3>Google-anmeldelser på autopilot</h3>
+        <p>Når snedkeropgav-opgaven er færdig, beder systemet automatisk kunden om en Google-anmeldelse. Dit omdømme vokser imens du arbejder.</p>
+        <div class="service-result">Fra 5 til 40+ anmeldelser på 2 måneder</div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <h3>Snedkerhjemmeside der konverterer</h3>
+        <p>En professionel hjemmeside bygget specifikt til snedkere — med de rigtige søgeord, tillidsbevisende indhold og et tydeligt kontaktflow.</p>
+        <div class="service-result">Kunder ringer — ikke surfer videre</div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <h3>Samlet overblik</h3>
+        <p>Alle henvendelser, tilbud og anmeldelser samlet ét sted. Ingen rodet indbakke — bare overblik over hvad der sker i din snedkerforretning.</p>
+        <div class="service-result">Ét sted for alt</div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Kun for snedkere</h3>
+        <p>Vi arbejder ikke med advokater, tandlæger eller webshops. Vores systemer er bygget til snedkerbranchen — vi forstår din hverdag og dine kunder.</p>
+        <div class="service-result">Ingen generiske løsninger</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ BYER I TREKANTSOMRÅDET ═══════════════ -->
+<section class="section cities-bg">
+  <div class="section-inner">
+    <div class="section-header">
+      <p class="section-label">Vores område</p>
+      <h2 class="section-title">Vi kender Trekantsområdet</h2>
+      <p class="section-sub">Vi hjælper snedkere i hele Trekantsområdet med at skaffe lokale kunder — fra Vejle i nord til Kolding i syd og Fredericia i vest.</p>
+    </div>
+    <div class="cities-grid">
+      <div class="city-card reveal">
+        <div class="city-name">Vejle</div>
+        <div class="city-desc">Trekantsområdets største by med stor efterspørgsel på snedkere til køkkener, vinduer og specialmøbler.</div>
+        <span class="city-tag">Snedker Vejle</span>
+      </div>
+      <div class="city-card reveal">
+        <div class="city-name">Kolding</div>
+        <div class="city-desc">Stærkt voksende by med mange renoverings- og nybyggeriprojekter hvor dygtige snedkere er eftertragtet.</div>
+        <span class="city-tag">Snedker Kolding</span>
+      </div>
+      <div class="city-card reveal">
+        <div class="city-name">Fredericia</div>
+        <div class="city-desc">Industriby med stor variation i snedkeropgaver — fra private boliger til erhvervsejendomme.</div>
+        <span class="city-tag">Snedker Fredericia</span>
+      </div>
+      <div class="city-card reveal">
+        <div class="city-name">Give</div>
+        <div class="city-desc">Landsby med mange ældre huse der trænger til vindues- og dørskift samt snedkerarbejde.</div>
+        <span class="city-tag">Snedker Give</span>
+      </div>
+      <div class="city-card reveal">
+        <div class="city-name">Billund</div>
+        <div class="city-desc">Vækstby med turisme og erhverv — og stadig efterspørgsel på dygtige lokale snedkere.</div>
+        <span class="city-tag">Snedker Billund</span>
+      </div>
+      <div class="city-card reveal">
+        <div class="city-name">Jelling</div>
+        <div class="city-desc">Historisk by med mange ældre boliger — og kunder der foretrækker en lokal og pålidelig snedker.</div>
+        <span class="city-tag">Snedker Jelling</span>
+      </div>
+      <div class="city-card reveal">
+        <div class="city-name">Børkop</div>
+        <div class="city-desc">Attraktivt boligområde med mange parcelhuse og efterspørgsel på alt fra køkkenrenovering til specialmøbler.</div>
+        <span class="city-tag">Snedker Børkop</span>
+      </div>
+      <div class="city-card reveal">
+        <div class="city-name">Egtved</div>
+        <div class="city-desc">Landkommune med mange private husstande der har brug for en lokal snedker de kan stole på.</div>
+        <span class="city-tag">Snedker Egtved</span>
+      </div>
+    </div>
+    <!-- Skjult SEO-tekst som er naturlig i kontekst -->
+    <p style="margin-top:2rem; font-size:0.85rem; color:var(--iron-light); max-width:680px;">
+      Uanset om dine kunder er i Vejle, Kolding, Fredericia eller de omkringliggende kommuner, sørger vi for at de kan finde dig — præcis når de har brug for en snedker.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════ STEPS ═══════════════ -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-header">
+      <p class="section-label">Processen</p>
+      <h2 class="section-title">Klar på to uger.</h2>
+      <p class="section-sub">Du behøver ikke bruge tid du ikke har. Vi klarer opsætningen.</p>
+    </div>
+    <div class="steps-track">
+      <div class="step reveal">
+        <div class="step-dot">1</div>
+        <h3>Gratis snak</h3>
+        <p>Vi tager en uforpligtende samtale om din snedkerforretning og finder ud af hvad du har brug for.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-dot">2</div>
+        <h3>Vi sætter det op</h3>
+        <p>Vi konfigurerer alle systemer og tilpasser dem til din snedkerforretning. Du gør ingenting.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-dot">3</div>
+        <h3>Du får opgaver</h3>
+        <p>Systemet begynder at arbejde. Snedker-kunder fra Trekantsområdet finder dig og tager kontakt.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-dot">4</div>
+        <h3>Du tjener mere</h3>
+        <p>Flere opgaver, bedre omdømme, færre tabte tilbud. Vi holder øje og justerer løbende.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ TESTIMONIALS ═══════════════ -->
+<section class="section testimonials-bg">
+  <div class="section-inner">
+    <div class="section-header">
+      <p class="section-label">Resultater</p>
+      <h2 class="section-title">Snedkere der er vokset<br>med MesterGreb</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"På tre måneder er mine Google-anmeldelser gået fra 2 til 38. Jeg får mange flere henvendelser nu — og det er de rigtige kunder der ringer."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-av">OO</div>
+          <div>
+            <div class="testimonial-name">Oliver Olsen</div>
+            <div class="testimonial-trade">VVS'er, Vejle</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Jeg troede ikke det ville gøre den store forskel — men mine tilbud bliver accepteret meget oftere nu. Den automatiske opfølgning er guld værd."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-av v2">JB</div>
+          <div>
+            <div class="testimonial-name">Jacob Bang</div>
+            <div class="testimonial-trade">Snedker, Kolding</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Super let at komme i gang. De satte alt op på under en uge, og allerede efter 14 dage begyndte nye kunder at ringe fra Fredericia-området."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-av v3">LF</div>
+          <div>
+            <div class="testimonial-name">Lasse Frost</div>
+            <div class="testimonial-trade">Snedker, Fredericia</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CTA BANNER ═══════════════ -->
+<section class="cta-banner">
+  <div class="cta-banner-inner">
+    <h2>Klar til flere snedkeropgaver i Trekantsområdet?</h2>
+    <p>Book en gratis og uforpligtende snak. Vi gennemgår din situation og fortæller ærligt hvad der vil gøre den største forskel for din snedkerforretning.</p>
+    <a href="#kontakt" class="btn-white">Book gratis snak →</a>
+  </div>
+</section>
+
+<!-- ═══════════════ KONTAKT ═══════════════ -->
+<section class="section" id="kontakt">
+  <div class="section-inner">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p class="section-label">Kontakt</p>
+        <h2 class="section-title">Lad os tage<br>en snak.</h2>
+        <p>Udfyld formularen, så kontakter vi dig inden for én hverdag. Ingen forpligtelse — bare en ærlig samtale om hvad vi kan gøre for din snedkerforretning i Trekantsområdet.</p>
+        <div class="contact-items">
+          <div class="contact-item">
+            <div class="contact-item-icon">
+              <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <span class="contact-item-text">hej@mestergreb.dk</span>
+          </div>
+        </div>
+        <div class="contact-promise">
+          🔒 Ingen binding · Svar inden for 24 timer · Ingen forpligtelse
+        </div>
+      </div>
+      <div class="form-card">
+        <h3>Book din gratis samtale</h3>
+        <form id="contact-form" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Dit navn *</label>
+              <input type="text" id="name" name="name" placeholder="Oliver Olsen" />
+            </div>
+            <div class="form-group">
+              <label for="phone">Telefon *</label>
+              <input type="tel" id="phone" name="phone" placeholder="12 34 56 78" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">E-mail *</label>
+            <input type="email" id="email" name="email" placeholder="din@email.dk" />
+          </div>
+          <div class="form-group">
+            <label for="city">Hvilken by er du i primært? *</label>
+            <select id="city" name="city">
+              <option value="" disabled selected>Vælg by</option>
+              <option>Vejle</option>
+              <option>Kolding</option>
+              <option>Fredericia</option>
+              <option>Give</option>
+              <option>Billund</option>
+              <option>Jelling</option>
+              <option>Børkop</option>
+              <option>Egtved</option>
+              <option>Anden by i Trekantsområdet</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Din største udfordring (valgfrit)</label>
+            <textarea id="message" name="message" placeholder="Fx: Jeg har svært ved at skaffe nye snedker-kunder, eller mine tilbud bliver sjældent accepteret..."></textarea>
+          </div>
+          <button type="submit" class="form-submit" id="submit-btn">Book gratis snak →</button>
+          <p class="form-disclaimer">Ved at sende accepterer du at vi kontakter dig. Ingen spam, ingen forpligtelse.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <a href="/" class="footer-logo">Mester<span>Greb</span></a>
+        <p class="footer-tagline">Hjælper håndværkere i Trekantsområdet med at vækste</p>
+      </div>
+      <nav class="footer-nav">
+        <div class="footer-nav-col">
+          <h4>Håndværkere</h4>
+          <a href="/vvs-mester">VVS</a>
+          <a href="/elektriker">Elektriker</a>
+          <a href="/murer">Murer</a>
+          <a href="/maler">Maler</a>
+          <a href="/tomrer">Tømrer</a>
+          <a href="/snedker" class="active">Snedker</a>
+        </div>
+        <div class="footer-nav-col">
+          <h4>Byer</h4>
+          <a href="/snedker#vejle">Snedker Vejle</a>
+          <a href="/snedker#kolding">Snedker Kolding</a>
+          <a href="/snedker#fredericia">Snedker Fredericia</a>
+          <a href="/snedker#billund">Snedker Billund</a>
+        </div>
+        <div class="footer-nav-col">
+          <h4>MesterGreb</h4>
+          <a href="/#ydelser">Ydelser</a>
+          <a href="/#hvordan">Sådan virker det</a>
+          <a href="/#priser">Priser</a>
+          <a href="#kontakt">Kontakt</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-text">© 2025 MesterGreb — Hjælper snedkere i Trekantsområdet med at vækste</p>
+      <p class="footer-text">CVR: XX XX XX XX</p>
+    </div>
+  </div>
+</footer>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="modal-success">
+  <div class="modal-box">
+    <button class="modal-x" onclick="closeModal('modal-success')">✕</button>
+    <div class="modal-icon success">🎉</div>
+    <h3>Tusinde tak!</h3>
+    <p>Vi vender tilbage inden for 24 timer for at aftale en uforpligtende snak om din snedkerforretning.</p>
+    <button class="modal-close rust-btn" onclick="closeModal('modal-success')">Perfekt, tak!</button>
+  </div>
+</div>
+<div class="modal-overlay" id="modal-error">
+  <div class="modal-box">
+    <button class="modal-x" onclick="closeModal('modal-error')">✕</button>
+    <div class="modal-icon error">⚠️</div>
+    <h3>Næsten der!</h3>
+    <p id="modal-error-msg">Udfyld venligst alle påkrævede felter.</p>
+    <button class="modal-close" onclick="closeModal('modal-error')">Prøv igen</button>
+  </div>
+</div>
+
+<script>
+  /* NAV SCROLL */
+  window.addEventListener('scroll', () => {
+    document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 30);
+  });
+
+  /* MOBILE MENU */
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  function closeMobileMenu() {
+    mobileMenu.classList.remove('open');
+    hamburger.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  /* REVEAL ON SCROLL */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  /* MODALS */
+  function openModal(id) {
+    document.getElementById(id).classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(id) {
+    document.getElementById(id).classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  document.querySelectorAll('.modal-overlay').forEach(m => {
+    m.addEventListener('click', (e) => { if (e.target === m) closeModal(m.id); });
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') document.querySelectorAll('.modal-overlay.active').forEach(m => closeModal(m.id));
+  });
+
+  /* FORM */
+  document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name  = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const city  = document.getElementById('city').value;
+    const msgEl = document.getElementById('modal-error-msg');
+
+    if (!name) {
+      msgEl.textContent = 'Indtast venligst dit navn.';
+      openModal('modal-error'); return;
+    }
+    if (!phone && !email) {
+      msgEl.textContent = 'Vi har brug for enten dit telefonnummer eller din e-mail.';
+      openModal('modal-error'); return;
+    }
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      msgEl.textContent = 'E-mailadressen ser ikke korrekt ud.';
+      openModal('modal-error'); return;
+    }
+    if (!city) {
+      msgEl.textContent = 'Vælg venligst hvilken by du primært er i.';
+      openModal('modal-error'); return;
+    }
+
+    const btn = document.getElementById('submit-btn');
+    btn.textContent = 'Sender...';
+    btn.disabled = true;
+    setTimeout(() => {
+      document.getElementById('contact-form').reset();
+      btn.textContent = 'Book gratis snak →';
+      btn.disabled = false;
+      openModal('modal-success');
+    }, 900);
+  });
+
+  /* ---- CITY SWAP ---- */
+  const cities = ['VEJLE', 'KOLDING', 'FREDERICIA', 'BILLUND', 'GIVE', 'JELLING', 'BØRKOP'];
+  let cityIndex = 0;
+  const cityEl = document.getElementById('citySwap');
+  if (cityEl) {
+    setInterval(() => {
+      cityEl.classList.add('fade-out');
+      setTimeout(() => {
+        cityIndex = (cityIndex + 1) % cities.length;
+        cityEl.textContent = cities[cityIndex];
+        cityEl.classList.remove('fade-out');
+      }, 300);
+    }, 2200);
+  }
+</script>
+</body>
+</html>
