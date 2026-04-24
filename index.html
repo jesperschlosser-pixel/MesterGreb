@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="da">
 <head>
@@ -709,18 +710,38 @@
     .form-disclaimer { font-size: 0.76rem; color: var(--iron-light); text-align: center; }
 
     /* ===================== FOOTER ===================== */
-    footer { background: var(--iron); color: rgba(255,255,255,0.45); padding: 2.8rem 2.5rem; }
-    .footer-inner {
-      max-width: 1120px; margin: 0 auto;
+    footer { background: var(--iron); color: rgba(255,255,255,0.45); padding: 3rem 2.5rem 2rem; }
+    .footer-inner { max-width: 1120px; margin: 0 auto; }
+    .footer-top {
       display: flex; justify-content: space-between;
-      align-items: center; flex-wrap: wrap; gap: 1rem;
+      align-items: flex-start; flex-wrap: wrap; gap: 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 1.5rem;
     }
+    .footer-brand {}
     .footer-logo {
       font-family: 'Fraunces', serif;
       font-size: 1.25rem; font-weight: 700;
       color: var(--white); text-decoration: none;
+      display: block; margin-bottom: 0.4rem;
     }
     .footer-logo span { color: var(--rust-light); }
+    .footer-tagline { font-size: 0.82rem; color: rgba(255,255,255,0.35); }
+    .footer-links-col h4 {
+      font-size: 0.7rem; letter-spacing: 0.13em; text-transform: uppercase;
+      color: rgba(255,255,255,0.3); font-weight: 500; margin-bottom: 0.9rem;
+    }
+    .footer-links-col a {
+      display: block; text-decoration: none;
+      color: rgba(255,255,255,0.55); font-size: 0.86rem;
+      padding: 0.22rem 0; transition: color 0.15s;
+    }
+    .footer-links-col a:hover { color: var(--white); }
+    .footer-bottom {
+      display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 0.75rem;
+    }
     .footer-text { font-size: 0.82rem; }
 
     /* ===================== MODAL ===================== */
@@ -978,7 +999,7 @@
 
 <!-- NAV -->
 <nav id="main-nav">
-  <a href="#" class="nav-logo">Mester<span>Greb</span></a>
+  <a href="/" class="nav-logo">Mester<span>Greb</span></a>
   <div class="nav-links">
     <a href="#ydelser">Ydelser</a>
     <a href="#hvordan">Sådan virker det</a>
@@ -1526,9 +1547,25 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
-    <a href="#" class="footer-logo">Mester<span>Greb</span></a>
-    <p class="footer-text">© 2025 MesterGreb — Hjælper håndværkere med at vækste</p>
-    <p class="footer-text">CVR: XX XX XX XX</p>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="/" class="footer-logo">Mester<span>Greb</span></a>
+        <p class="footer-tagline">Hjælper håndværkere i Trekantsområdet med at vækste</p>
+      </div>
+      <div class="footer-links-col">
+        <h4>Håndværkersider</h4>
+        <a href="/vvs">VVS</a>
+        <a href="/elektriker">Elektriker</a>
+        <a href="/murer">Murer</a>
+        <a href="/maler">Maler</a>
+        <a href="/tomrer">Tømrer</a>
+        <a href="/snedker">Snedker</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-text">© 2025 MesterGreb — Hjælper håndværkere med at vækste</p>
+      <p class="footer-text">CVR: XX XX XX XX</p>
+    </div>
   </div>
 </footer>
 
