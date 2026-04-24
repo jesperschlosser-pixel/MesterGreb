@@ -724,6 +724,26 @@
 </head>
 <body>
 
+<!-- MODALS -->
+<div class="modal-overlay" id="modal-success">
+  <div class="modal-box">
+    <button class="modal-x" onclick="closeModal('modal-success')">✕</button>
+    <div class="modal-icon success">🎉</div>
+    <h3>Tusinde tak!</h3>
+    <p>Vi vender tilbage inden for 24 timer for at aftale en uforpligtende snak om din snedkerforretning.</p>
+    <button class="modal-close rust-btn" onclick="closeModal('modal-success')">Perfekt, tak!</button>
+  </div>
+</div>
+<div class="modal-overlay" id="modal-error">
+  <div class="modal-box">
+    <button class="modal-x" onclick="closeModal('modal-error')">✕</button>
+    <div class="modal-icon error">⚠️</div>
+    <h3>Næsten der!</h3>
+    <p id="modal-error-msg">Udfyld venligst alle påkrævede felter.</p>
+    <button class="modal-close" onclick="closeModal('modal-error')">Prøv igen</button>
+  </div>
+</div>
+
 <!-- NAV -->
 <nav id="main-nav">
   <a href="/" class="nav-logo">Mester<span>Greb</span></a>
@@ -1129,25 +1149,6 @@
   </div>
 </footer>
 
-<!-- MODALS -->
-<div class="modal-overlay" id="modal-success">
-  <div class="modal-box">
-    <button class="modal-x" onclick="closeModal('modal-success')">✕</button>
-    <div class="modal-icon success">🎉</div>
-    <h3>Tusinde tak!</h3>
-    <p>Vi vender tilbage inden for 24 timer for at aftale en uforpligtende snak om din snedkerforretning.</p>
-    <button class="modal-close rust-btn" onclick="closeModal('modal-success')">Perfekt, tak!</button>
-  </div>
-</div>
-<div class="modal-overlay" id="modal-error">
-  <div class="modal-box">
-    <button class="modal-x" onclick="closeModal('modal-error')">✕</button>
-    <div class="modal-icon error">⚠️</div>
-    <h3>Næsten der!</h3>
-    <p id="modal-error-msg">Udfyld venligst alle påkrævede felter.</p>
-    <button class="modal-close" onclick="closeModal('modal-error')">Prøv igen</button>
-  </div>
-</div>
 
 <script>
   /* NAV SCROLL */
