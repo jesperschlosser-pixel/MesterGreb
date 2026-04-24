@@ -898,6 +898,80 @@
       .crafts-grid { grid-template-columns: repeat(2, 1fr); }
       .steps-track { grid-template-columns: 1fr; }
     }
+    /* ===================== CTA STRIP ===================== */
+    .cta-strip {
+      background: var(--sand-dark);
+      border-top: 1px solid rgba(44,44,40,0.08);
+      border-bottom: 1px solid rgba(44,44,40,0.08);
+      padding: 2rem 2.5rem;
+    }
+    .cta-strip-dark {
+      background: var(--oak);
+    }
+    .cta-strip-inner {
+      max-width: 1120px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 2rem; flex-wrap: wrap;
+    }
+    .cta-strip-text {
+      font-family: 'Fraunces', serif;
+      font-size: 1.15rem; font-weight: 600;
+      color: var(--iron); letter-spacing: -0.01em;
+      flex: 1;
+    }
+    .cta-strip-dark .cta-strip-text { color: var(--white); }
+
+    /* ===================== STICKY BAR ===================== */
+    .sticky-bar {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 300;
+      display: flex;
+      box-shadow: 0 -4px 24px rgba(44,44,40,0.15);
+      transform: translateY(100%);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .sticky-bar.visible { transform: translateY(0); }
+    .sticky-btn {
+      flex: 1;
+      display: flex; align-items: center; gap: 0.75rem;
+      padding: 0.9rem 1.5rem;
+      text-decoration: none;
+      transition: filter 0.2s;
+    }
+    .sticky-btn:hover { filter: brightness(1.08); }
+    .sticky-btn-phone {
+      background: var(--iron);
+      border-right: 1px solid rgba(255,255,255,0.1);
+    }
+    .sticky-btn-mail { background: var(--rust); }
+    .sticky-btn svg {
+      width: 22px; height: 22px;
+      stroke: rgba(255,255,255,0.85);
+      flex-shrink: 0;
+    }
+    .sticky-btn-label {
+      font-family: 'Fraunces', serif;
+      font-size: 0.95rem; font-weight: 600;
+      color: var(--white); line-height: 1;
+    }
+    .sticky-btn-sub {
+      font-size: 0.75rem; color: rgba(255,255,255,0.55);
+      margin-top: 0.15rem; display: block;
+    }
+    .sticky-btn-text { display: flex; flex-direction: column; }
+
+    /* Push page content up so sticky bar doesn't cover it */
+    body.sticky-visible { padding-bottom: 72px; }
+
+    @media (max-width: 480px) {
+      .sticky-btn { padding: 0.85rem 1rem; gap: 0.5rem; }
+      .sticky-btn-sub { display: none; }
+      .sticky-btn-label { font-size: 0.9rem; }
+      .cta-strip { padding: 1.5rem; }
+      .cta-strip-inner { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    }
+
   </style>
 </head>
 <body>
@@ -1188,6 +1262,14 @@
   </div>
 </section>
 
+<!-- CTA STRIP after how it works -->
+<div class="cta-strip">
+  <div class="cta-strip-inner">
+    <p class="cta-strip-text">Klar til at komme i gang? Det koster dig ikke andet end 20 minutter.</p>
+    <a href="#kontakt" class="btn-primary">Book gratis snak →</a>
+  </div>
+</div>
+
 <!-- PRIDE SECTION -->
 <section class="pride-section">
   <div class="pride-inner">
@@ -1217,7 +1299,13 @@
     </div>
     <div class="pride-photo-wrap">
       <div class="pride-photo" id="pride-photo">
-        <!-- Skift src til dit eget billede, fx: src="dit-billede.jpg" -->
+        <!--
+          SÅDAN INDSÆTTER DU DIT BILLEDE:
+          Erstat linjen nedenfor med:
+          <img src="DIT-BILLEDE.jpg" alt="Dit navn" />
+          Eller brug en URL:
+          <img src="https://eksempel.dk/billede.jpg" alt="Dit navn" />
+        -->
         <div class="pride-photo-placeholder">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           <span>Indsæt dit billede her</span>
@@ -1291,6 +1379,14 @@
     </div>
   </div>
 </section>
+
+<!-- CTA STRIP after testimonials -->
+<div class="cta-strip cta-strip-dark">
+  <div class="cta-strip-inner">
+    <p class="cta-strip-text">Slut dig til håndværkere der allerede fylder kalenderen automatisk.</p>
+    <a href="#kontakt" class="btn-primary">Bestil gratis tilbud →</a>
+  </div>
+</div>
 
 <!-- PRICING -->
 <section class="section" id="priser">
@@ -1436,6 +1532,29 @@
   </div>
 </footer>
 
+<!-- STICKY CONTACT BAR -->
+<div class="sticky-bar" id="sticky-bar">
+  <a href="tel:+4500000000" class="sticky-btn sticky-btn-phone">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.38A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 8 8l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 18z"/>
+    </svg>
+    <div class="sticky-btn-text">
+      <span class="sticky-btn-label">Ring nu</span>
+      <span class="sticky-btn-sub">+45 XX XX XX XX</span>
+    </div>
+  </a>
+  <a href="mailto:hej@mestergreb.dk" class="sticky-btn sticky-btn-mail">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+      <polyline points="22,6 12,13 2,6"/>
+    </svg>
+    <div class="sticky-btn-text">
+      <span class="sticky-btn-label">Send en mail</span>
+      <span class="sticky-btn-sub">hej@mestergreb.dk</span>
+    </div>
+  </a>
+</div>
+
 <!-- SUCCESS MODAL -->
 <div class="modal-overlay" id="modal-success">
   <div class="modal-box">
@@ -1459,6 +1578,16 @@
 </div>
 
 <script>
+  /* ---- STICKY BAR ---- */
+  const stickyBar = document.getElementById('sticky-bar');
+  function updateStickyBar() {
+    const show = window.scrollY > 300;
+    stickyBar.classList.toggle('visible', show);
+    document.body.classList.toggle('sticky-visible', show);
+  }
+  window.addEventListener('scroll', updateStickyBar, { passive: true });
+  updateStickyBar();
+
   /* ---- NAV SCROLL ---- */
   window.addEventListener('scroll', () => {
     document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 30);
