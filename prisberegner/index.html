@@ -962,13 +962,30 @@
     .pc-base-sub { font-size: 0.9rem; color: var(--iron-light); margin-bottom: 1.6rem; }
 
     .pc-feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem 1.5rem; }
-    .pc-feature-item { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.92rem; color: var(--iron-mid); }
-    .pc-feature-check {
-      flex-shrink: 0; width: 18px; height: 18px; border-radius: 50%;
-      background: var(--oak); display: flex; align-items: center; justify-content: center;
-      margin-top: 0.1rem;
+    .pc-feature-count { font-size: 0.85rem; color: var(--iron-light); margin-bottom: 1.1rem; }
+    .pc-feature-count strong { font-family: 'Fraunces', serif; color: var(--rust); font-size: 1.15rem; font-weight: 700; }
+
+    .pc-feature-item {
+      display: flex; align-items: center; gap: 0.75rem;
+      font-size: 0.9rem; color: var(--iron-mid);
+      padding: 0.85rem 1rem;
+      border: 1px solid rgba(44,44,40,0.08);
+      border-radius: var(--radius);
+      background: var(--sand);
+      opacity: 0; transform: translateY(10px) scale(0.98);
+      transition: opacity 0.4s ease, transform 0.4s ease, border-color 0.2s ease, background 0.2s ease;
     }
-    .pc-feature-check svg { width: 10px; height: 10px; stroke: var(--white); stroke-width: 3; fill: none; }
+    .pc-feature-item.pc-in { opacity: 1; transform: translateY(0) scale(1); }
+    .pc-feature-item:hover { border-color: rgba(192,82,43,0.35); background: var(--white); }
+    .pc-feature-item:hover .pc-feature-check { background: var(--rust); }
+    .pc-feature-item:hover .pc-feature-check svg { stroke: var(--white); }
+
+    .pc-feature-check {
+      flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%;
+      background: var(--rust-pale); display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .pc-feature-check svg { width: 18px; height: 18px; stroke: var(--rust); stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round; transition: stroke 0.2s; }
 
     .pc-always-on {
       display: inline-block; margin-top: 1.6rem;
@@ -980,8 +997,24 @@
     .pc-addons h3 { font-family: 'Fraunces', serif; font-size: 1.25rem; font-weight: 700; color: var(--iron); margin-bottom: 0.3rem; }
     .pc-addons > p { font-size: 0.9rem; color: var(--iron-light); margin-bottom: 1.5rem; }
 
-    .pc-addon-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.1rem 0; border-top: 1px solid rgba(44,44,40,0.08); }
+    .pc-addon-row {
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      padding: 1.1rem 0.6rem; border-top: 1px solid rgba(44,44,40,0.08);
+      border-radius: var(--radius);
+      opacity: 0; transform: translateY(10px);
+      transition: opacity 0.4s ease, transform 0.4s ease, background 0.2s ease;
+    }
+    .pc-addon-row.pc-in { opacity: 1; transform: translateY(0); }
     .pc-addon-row:first-of-type { border-top: none; }
+    .pc-addon-row:hover { background: rgba(192,82,43,0.04); }
+    .pc-addon-row:hover .pc-addon-icon { background: var(--rust); }
+    .pc-addon-row:hover .pc-addon-icon svg { stroke: var(--white); }
+    .pc-addon-icon {
+      flex-shrink: 0; width: 38px; height: 38px; border-radius: 50%;
+      background: var(--rust-pale); display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .pc-addon-icon svg { width: 18px; height: 18px; stroke: var(--rust); stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round; transition: stroke 0.2s; }
     .pc-addon-info { flex: 1 1 auto; min-width: 0; }
 
     .pc-ad-disclaimer {
@@ -1116,17 +1149,18 @@
             <div class="pc-price-tag pc-locked" id="pc-base-price">5.500 kr<span>/md ex. moms</span></div>
           </div>
           <p class="pc-base-sub">Det fulde system til flere henvendelser - inkluderet for alle kunder.</p>
-          <div class="pc-feature-grid">
-            <div class="pc-feature-item"><span class="pc-feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Onboarding og strategi</div>
-            <div class="pc-feature-item"><span class="pc-feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Udvikling af lead magnet (årshjul)</div>
-            <div class="pc-feature-item"><span class="pc-feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>4 sæsonbestemte e-mailkampagner/år</div>
-            <div class="pc-feature-item"><span class="pc-feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Automatisk reaktivering af tidligere kunder</div>
-            <div class="pc-feature-item"><span class="pc-feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Opsætning og optimering af Google-profil</div>
-            <div class="pc-feature-item"><span class="pc-feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Automatisk indsamling af Google-anmeldelser</div>
-            <div class="pc-feature-item"><span class="pc-feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Chatbot til leadopsamling på din hjemmeside</div>
-            <div class="pc-feature-item"><span class="pc-feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>CRM-opsætning og adgang</div>
-            <div class="pc-feature-item"><span class="pc-feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>GDPR-compliant opsætning</div>
-            <div class="pc-feature-item"><span class="pc-feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Månedligt 1:1 statusmøde</div>
+          <p class="pc-feature-count"><strong id="pc-feature-num">0</strong> ydelser inkluderet i grundpakken</p>
+          <div class="pc-feature-grid" id="pc-feature-grid">
+            <div class="pc-feature-item"><span class="pc-feature-check"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span>Onboarding og strategi</div>
+            <div class="pc-feature-item"><span class="pc-feature-check"><svg viewBox="0 0 24 24"><path d="M12 4L16 8L8 20Z"/><path d="M10 5L9 2M12 4L13 1M14 6L16 4"/></svg></span>Gulerod, til at indsamle kunder</div>
+            <div class="pc-feature-item"><span class="pc-feature-check"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>4 sæsonbestemte e-mailkampagner/år</div>
+            <div class="pc-feature-item"><span class="pc-feature-check"><svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></span>Automatisk reaktivering af tidligere kunder</div>
+            <div class="pc-feature-item"><span class="pc-feature-check"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>Opsætning og optimering af Google-profil</div>
+            <div class="pc-feature-item"><span class="pc-feature-check"><svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9 16.5 13.5 18.5 21 12 16.5 5.5 21 7.5 13.5 2 9 9 9"/></svg></span>Automatisk indsamling af Google-anmeldelser</div>
+            <div class="pc-feature-item"><span class="pc-feature-check"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span>Chatbot til leadopsamling på din hjemmeside</div>
+            <div class="pc-feature-item"><span class="pc-feature-check"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>CRM-opsætning og adgang</div>
+            <div class="pc-feature-item"><span class="pc-feature-check"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11.5 14.5 16 9"/></svg></span>GDPR-compliant opsætning</div>
+            <div class="pc-feature-item"><span class="pc-feature-check"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>Månedligt 1:1 statusmøde</div>
           </div>
           <div class="pc-always-on">Indgår altid - ingen opsætningsgebyr.</div>
         </div>
@@ -1137,6 +1171,7 @@
           <p>Vi kan også tage os af Meta-annoncer (Facebook & Instagram)</p>
 
           <div class="pc-addon-row">
+            <span class="pc-addon-icon"><svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></span>
             <div class="pc-addon-info">
               <h4>Håndtering af Meta-annoncer</h4>
               <p>Vi sætter op og optimerer dine annoncer på Facebook og Instagram løbende.</p>
@@ -1151,6 +1186,7 @@
           </div>
 
           <div class="pc-addon-row">
+            <span class="pc-addon-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></span>
             <div class="pc-addon-info">
               <h4>Grafik til Meta-annoncer</h4>
               <p>Du sender billeder - vi laver den færdige annoncegrafik.</p>
@@ -1326,6 +1362,34 @@
   });
 
   pcRecalc();
+
+  /* ---- STAGGER REVEAL FOR FEATURES / ADDONS ---- */
+  function pcRevealGroup(selector, staggerMs, onEach) {
+    var items = document.querySelectorAll(selector);
+    if (!items.length) return;
+    var obs = new IntersectionObserver(function(entries, o) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          items.forEach(function(el, i) {
+            setTimeout(function() {
+              el.classList.add('pc-in');
+              if (onEach) onEach(i);
+            }, i * staggerMs);
+          });
+          o.disconnect();
+        }
+      });
+    }, { threshold: 0.15 });
+    obs.observe(items[0]);
+  }
+
+  var pcFeatureNumEl = document.getElementById('pc-feature-num');
+  var pcFeatureCounted = 0;
+  pcRevealGroup('.pc-feature-item', 80, function() {
+    pcFeatureCounted++;
+    pcFeatureNumEl.textContent = pcFeatureCounted;
+  });
+  pcRevealGroup('.pc-addon-row', 120);
 </script>
 </body>
 </html>
