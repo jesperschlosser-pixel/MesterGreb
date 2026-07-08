@@ -1122,6 +1122,25 @@
       .pc-addon-info { flex-basis: 100%; }
       .pc-addon-control { flex-basis: 100%; justify-content: space-between; margin-top: 0.9rem; }
     }
+  
+    /* Cookie Consent Banner */
+    .mg-cookie-banner { position: fixed; bottom: 0; left: 0; right: 0; background: var(--iron, #2C2C28); color: var(--cream, #FEFCF8); padding: 1.2rem 1.5rem; padding-bottom: calc(1.2rem + env(safe-area-inset-bottom, 0px)); z-index: 99999; display: none; box-shadow: 0 -4px 24px rgba(0,0,0,0.2); font-family: 'DM Sans', sans-serif; }
+    .mg-cookie-banner.mg-show { display: block; }
+    .mg-cookie-content { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
+    .mg-cookie-text { margin: 0; font-size: 0.88rem; line-height: 1.55; flex: 1; min-width: 240px; color: var(--cream, #FEFCF8); }
+    .mg-cookie-text a { color: #E8A87C; text-decoration: underline; }
+    .mg-cookie-buttons { display: flex; gap: 0.7rem; flex-shrink: 0; flex-wrap: wrap; }
+    .mg-cookie-btn { padding: 0.65rem 1.3rem; border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 600; cursor: pointer; border: none; transition: opacity 0.2s, background 0.2s; white-space: nowrap; }
+    .mg-cookie-btn:hover { opacity: 0.85; }
+    .mg-cookie-btn-reject { background: transparent; color: var(--cream, #FEFCF8); border: 1px solid rgba(254,252,248,0.35); }
+    .mg-cookie-btn-settings { background: transparent; color: rgba(254,252,248,0.7); border: none; text-decoration: underline; padding: 0.65rem 0.4rem; }
+    .mg-cookie-btn-accept { background: var(--rust, #C0522B); color: var(--cream, #FEFCF8); }
+    @media (max-width: 640px) {
+      .mg-cookie-content { flex-direction: column; align-items: stretch; }
+      .mg-cookie-buttons { justify-content: stretch; }
+      .mg-cookie-btn-accept, .mg-cookie-btn-reject { flex: 1; text-align: center; }
+    }
+
   </style>
 </head>
 <body>
@@ -1173,8 +1192,8 @@
           <div class="pc-addon-row">
             <span class="pc-addon-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg></span>
             <div class="pc-addon-info">
-              <h4>1-5 medarbejdere</h4>
-              <p>Mindre team</p>
+              <h4>1 medarbejder</h4>
+              <p>Enkeltmandsvirksomhed</p>
             </div>
             <div class="pc-addon-control">
               <div class="pc-addon-price">Inkluderet</div>
@@ -1188,8 +1207,8 @@
           <div class="pc-addon-row">
             <span class="pc-addon-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
             <div class="pc-addon-info">
-              <h4>5-10 medarbejdere</h4>
-              <p>Mellemstort team</p>
+              <h4>2-10 medarbejdere</h4>
+              <p>Lille til mellemstort team</p>
             </div>
             <div class="pc-addon-control">
               <div class="pc-addon-price pc-locked">+1.000 kr/md</div>
@@ -1204,7 +1223,7 @@
             <span class="pc-addon-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></span>
             <div class="pc-addon-info">
               <h4>10+ medarbejdere</h4>
-              <p>Større team</p>
+              <p>Større virksomhed</p>
             </div>
             <div class="pc-addon-control">
               <div class="pc-addon-price pc-locked">+2.500 kr/md</div>
@@ -1283,6 +1302,7 @@
       <p class="footer-text">© 2025 MesterGreb - Hjælper håndværkere med at vækste</p>
       <p class="footer-text">CVR: XX XX XX XX</p>
       <a href="/privatlivspolitik" class="footer-text footer-link">Privatlivspolitik</a>
+      <a href="#" onclick="window.mgOpenCookieSettings(); return false;" class="footer-text footer-link">Cookie-indstillinger</a>
     </div>
   </div>
 </footer>
@@ -1405,5 +1425,100 @@
   });
   pcRevealGroup('.pc-addon-row', 120);
 </script>
+
+<!-- Cookie Consent Banner (GDPR) -->
+<div id="mg-cookie-banner" class="mg-cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie samtykke">
+  <div class="mg-cookie-content">
+    <p class="mg-cookie-text">Vi bruger cookies til at analysere trafikken på hjemmesiden. Cookies bliver først aktiveret, hvis du klikker "Accepter". Læs mere i vores <a href="/privatlivspolitik">privatlivspolitik</a>.</p>
+    <div class="mg-cookie-buttons">
+      <button id="mg-cookie-reject" class="mg-cookie-btn mg-cookie-btn-reject" type="button">Afvis</button>
+      <button id="mg-cookie-accept" class="mg-cookie-btn mg-cookie-btn-accept" type="button">Accepter</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var CONSENT_KEY = 'mg_cookie_consent';
+  var CONSENT_DAYS = 365;
+  var GA_ID = 'G-DCMDF437SK';
+
+  function getConsent() {
+    try {
+      var raw = localStorage.getItem(CONSENT_KEY);
+      if (!raw) return null;
+      var data = JSON.parse(raw);
+      var ageDays = (Date.now() - data.timestamp) / (1000 * 60 * 60 * 24);
+      if (ageDays > CONSENT_DAYS) return null;
+      return data.value;
+    } catch (e) { return null; }
+  }
+
+  function setConsent(value) {
+    try {
+      localStorage.setItem(CONSENT_KEY, JSON.stringify({ value: value, timestamp: Date.now() }));
+    } catch (e) {}
+  }
+
+  function loadGA() {
+    if (window.mgGaLoaded) return;
+    window.mgGaLoaded = true;
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', GA_ID);
+  }
+
+  function showBanner() {
+    var el = document.getElementById('mg-cookie-banner');
+    if (el) el.classList.add('mg-show');
+  }
+
+  function hideBanner() {
+    var el = document.getElementById('mg-cookie-banner');
+    if (el) el.classList.remove('mg-show');
+  }
+
+  function init() {
+    var consent = getConsent();
+    if (consent === 'accepted') {
+      loadGA();
+    } else if (consent === 'rejected') {
+      /* Ingen cookies indlæses */
+    } else {
+      showBanner();
+    }
+
+    var acceptBtn = document.getElementById('mg-cookie-accept');
+    var rejectBtn = document.getElementById('mg-cookie-reject');
+    if (acceptBtn) acceptBtn.addEventListener('click', function() {
+      setConsent('accepted');
+      loadGA();
+      hideBanner();
+    });
+    if (rejectBtn) rejectBtn.addEventListener('click', function() {
+      setConsent('rejected');
+      hideBanner();
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+  /* Gør det muligt at genåbne banneret fra et "Cookie-indstillinger" link i footeren */
+  window.mgOpenCookieSettings = function() {
+    showBanner();
+  };
+})();
+</script>
+
 </body>
 </html>
