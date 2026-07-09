@@ -254,6 +254,144 @@
     .hero-review-text { font-size: 0.82rem; color: var(--iron-mid); font-style: italic; line-height: 1.5; }
     .hero-review-author { font-size: 0.74rem; color: var(--iron-light); margin-top: 0.4rem; }
 
+    /* ===================== FLOW ORBIT WIDGET ===================== */
+    .dashboard-flow-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 3.5rem;
+      align-items: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .flow-orbit-stage {
+      position: relative;
+      width: 240px;
+      height: 240px;
+      flex-shrink: 0;
+      --sat-radius: 100px;
+      --dot-radius: 100px;
+    }
+    .flow-orbit-stage::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 220px; height: 220px;
+      margin: -110px 0 0 -110px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(192,82,43,0.16) 0%, rgba(192,82,43,0.05) 45%, rgba(192,82,43,0) 70%);
+      filter: blur(6px);
+      z-index: 0;
+    }
+    .flow-orbit-ring {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: calc(var(--sat-radius) * 2);
+      height: calc(var(--sat-radius) * 2);
+      margin-left: calc(var(--sat-radius) * -1);
+      margin-top: calc(var(--sat-radius) * -1);
+      border-radius: 50%;
+      border: 1.5px dashed rgba(192,82,43,0.3);
+    }
+    .flow-orbit-ring::after {
+      content: '';
+      position: absolute;
+      inset: -14px;
+      border-radius: 50%;
+      border: 1px solid rgba(139,107,61,0.14);
+    }
+    .flow-orbit {
+      position: absolute;
+      inset: 0;
+      animation: flow-orbit-spin 9s linear infinite;
+    }
+    .flow-orbit .flow-odot {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 7px; height: 7px;
+      margin: -3.5px 0 0 -3.5px;
+      border-radius: 50%;
+      background: var(--rust);
+      box-shadow: 0 0 6px rgba(192,82,43,0.75);
+      transform: rotate(0deg) translate(0, calc(-1 * var(--dot-radius)));
+    }
+    .flow-orbit .flow-odot.o2 { transform: rotate(180deg) translate(0, calc(-1 * var(--dot-radius))); }
+    @keyframes flow-orbit-spin { to { transform: rotate(360deg); } }
+
+    .flow-sat {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 34px; height: 34px;
+      margin: -17px 0 0 -17px;
+      border-radius: 50%;
+      background: linear-gradient(160deg, #ffffff 0%, var(--white) 100%);
+      border: 1px solid rgba(44,44,40,0.1);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 10px rgba(44,44,40,0.1), 0 1px 2px rgba(44,44,40,0.06);
+      z-index: 1;
+    }
+    .flow-sat svg { width: 15px; height: 15px; stroke: var(--oak); fill: none; stroke-width: 1.8; }
+    .flow-sat-0   { transform: rotate(0deg)   translate(0, calc(-1 * var(--sat-radius))) rotate(0deg); }
+    .flow-sat-60  { transform: rotate(60deg)  translate(0, calc(-1 * var(--sat-radius))) rotate(-60deg); }
+    .flow-sat-120 { transform: rotate(120deg) translate(0, calc(-1 * var(--sat-radius))) rotate(-120deg); }
+    .flow-sat-180 { transform: rotate(180deg) translate(0, calc(-1 * var(--sat-radius))) rotate(-180deg); }
+    .flow-sat-240 { transform: rotate(240deg) translate(0, calc(-1 * var(--sat-radius))) rotate(-240deg); }
+    .flow-sat-300 { transform: rotate(300deg) translate(0, calc(-1 * var(--sat-radius))) rotate(-300deg); }
+
+    .flow-center-badge {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 88px; height: 88px;
+      margin: -44px 0 0 -44px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #3a3a34 0%, var(--iron) 55%, #232320 100%);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow:
+        inset 0 1px 1px rgba(255,255,255,0.08),
+        inset 0 -6px 12px rgba(0,0,0,0.35),
+        0 12px 28px rgba(44,44,40,0.32),
+        0 0 0 1px rgba(192,82,43,0.15);
+      z-index: 2;
+      animation: flow-pulse-glow 4s ease-in-out infinite;
+    }
+    .flow-center-badge span {
+      font-family: 'Fraunces', serif;
+      font-weight: 700;
+      font-size: 0.72rem;
+      color: var(--rust-light);
+      letter-spacing: 0.03em;
+      line-height: 1.2;
+      text-align: center;
+    }
+    @keyframes flow-pulse-glow {
+      0%, 100% {
+        box-shadow:
+          inset 0 1px 1px rgba(255,255,255,0.08),
+          inset 0 -6px 12px rgba(0,0,0,0.35),
+          0 12px 28px rgba(44,44,40,0.32),
+          0 0 0 1px rgba(192,82,43,0.15),
+          0 0 22px rgba(192,82,43,0.12);
+      }
+      50% {
+        box-shadow:
+          inset 0 1px 1px rgba(255,255,255,0.1),
+          inset 0 -6px 12px rgba(0,0,0,0.35),
+          0 12px 28px rgba(44,44,40,0.32),
+          0 0 0 1px rgba(192,82,43,0.25),
+          0 0 34px rgba(192,82,43,0.22);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .dashboard-flow-grid { grid-template-columns: 1fr; justify-items: center; gap: 2.5rem; }
+    }
+    @media (max-width: 480px) {
+      .flow-orbit-stage { width: 184px; height: 184px; --sat-radius: 76px; --dot-radius: 76px; }
+      .flow-sat { width: 28px; height: 28px; margin: -14px 0 0 -14px; }
+      .flow-sat svg { width: 12px; height: 12px; }
+      .flow-center-badge { width: 68px; height: 68px; margin: -34px 0 0 -34px; }
+      .flow-center-badge span { font-size: 0.56rem; }
+    }
+
     /* ===================== CRAFTS SECTION ===================== */
     .crafts-section {
       padding: 4rem 2.5rem;
@@ -1189,39 +1327,56 @@
       <p class="section-label">Eksempel</p>
       <h2 class="section-title">Sådan kan det se ud,<br>når MesterGrebet kører.</h2>
     </div>
-    <div class="dashboard-preview-wrap">
-      <div class="hero-card">
-        <div class="hero-card-badge">Eksempel</div>
-        <div class="hero-card-header">
-          <div class="hero-avatar">KN</div>
-          <div>
-            <div class="hero-card-name">Klaus Nielsen</div>
-            <div class="hero-card-trade">VVS · Aktiv kunde</div>
+    <div class="dashboard-flow-grid">
+      <div class="dashboard-preview-wrap">
+        <div class="hero-card">
+          <div class="hero-card-badge">Eksempel</div>
+          <div class="hero-card-header">
+            <div class="hero-avatar">KN</div>
+            <div>
+              <div class="hero-card-name">Klaus Nielsen</div>
+              <div class="hero-card-trade">VVS · Aktiv kunde</div>
+            </div>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <div class="hero-stat-num up">+14</div>
+              <div class="hero-stat-label">nye opgaver i oktober</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-num">4.9★</div>
+              <div class="hero-stat-label">Google-bedømmelse</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-num up">83%</div>
+              <div class="hero-stat-label">tilbud accepteret</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-num">0t</div>
+              <div class="hero-stat-label">brugt på opfølgning</div>
+            </div>
+          </div>
+          <div class="hero-review">
+            <div class="hero-stars">★★★★★</div>
+            <div class="hero-review-text">"Super professionelt arbejde - og hurtig tilbagemelding. Anbefales varmt!"</div>
+            <div class="hero-review-author">- Google-anmeldelse, indsamlet automatisk</div>
           </div>
         </div>
-        <div class="hero-stats">
-          <div class="hero-stat">
-            <div class="hero-stat-num up">+14</div>
-            <div class="hero-stat-label">nye opgaver i oktober</div>
-          </div>
-          <div class="hero-stat">
-            <div class="hero-stat-num">4.9★</div>
-            <div class="hero-stat-label">Google-bedømmelse</div>
-          </div>
-          <div class="hero-stat">
-            <div class="hero-stat-num up">83%</div>
-            <div class="hero-stat-label">tilbud accepteret</div>
-          </div>
-          <div class="hero-stat">
-            <div class="hero-stat-num">0t</div>
-            <div class="hero-stat-label">brugt på opfølgning</div>
-          </div>
+      </div>
+
+      <div class="flow-orbit-stage">
+        <div class="flow-orbit-ring"></div>
+        <div class="flow-orbit">
+          <div class="flow-odot o1"></div>
+          <div class="flow-odot o2"></div>
         </div>
-        <div class="hero-review">
-          <div class="hero-stars">★★★★★</div>
-          <div class="hero-review-text">"Super professionelt arbejde - og hurtig tilbagemelding. Anbefales varmt!"</div>
-          <div class="hero-review-author">- Google-anmeldelse, indsamlet automatisk</div>
-        </div>
+        <div class="flow-sat flow-sat-0"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></div>
+        <div class="flow-sat flow-sat-60"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="4" rx="1"/><path d="M9 4H6a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-3"/><path d="M9 12h6M9 16h6"/></svg></div>
+        <div class="flow-sat flow-sat-120"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/></svg></div>
+        <div class="flow-sat flow-sat-180"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 2.9 6.3 6.9.9-5 4.9 1.2 6.9L12 17.6 5.9 21l1.2-6.9-5-4.9 6.9-.9L12 2z"/></svg></div>
+        <div class="flow-sat flow-sat-240"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-2"/><rect x="8" y="1" width="8" height="4" rx="1"/></svg></div>
+        <div class="flow-sat flow-sat-300"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 1 2.6 6.4"/><path d="M3 21v-5h5"/></svg></div>
+        <div class="flow-center-badge"><span>MESTER<br>GREB</span></div>
       </div>
     </div>
   </div>
